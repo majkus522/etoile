@@ -5,6 +5,7 @@ import "./App.css";
 
 import iconFavourite from "./assets/ulubione.png";
 import iconLogo from "./assets/logo.png";
+import iconSample from "./assets/Sample.png";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -45,9 +46,16 @@ function App() {
       <main className="main-content">
         <h1>Wyświetlarka to do</h1>
         <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
+          <img src={iconSample} alt="Przykład" className="wyb-Sample-img" />
+          <h2
+            style={{
+              fontFamily: "Belleza",
+              fontWeight: "bold",
+              color: "#000030",
+            }}
+          >
+            CENA CAŁKOWITA
+          </h2>
         </div>
       </main>
     </div>
