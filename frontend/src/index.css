@@ -1,8 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Kluczowe: padding nie powiększa szerokości elementu */
+}
+
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 
 .app-container {
@@ -34,6 +39,7 @@
 }
 
 .nav-menu {
+  justify-content: center;
   display: flex;
   list-style: none;
   gap: 30px;
@@ -58,13 +64,11 @@
 }
 
 .nav-logo {
-  width: 18px;
-  height: 18px;
+  height: 40px;
 }
 
 .nav-logo img {
-  width: 80px;
-  height: 30px;
+  height: 40px;
   object-fit: contain;
 }
 
