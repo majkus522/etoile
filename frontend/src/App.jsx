@@ -29,14 +29,15 @@ function App() {
         </ul>
 
         <div className="nav-actions">
-          <button
-            className="nav-icon-btn"
-            onClick={() => console.log("Szukaj")}
-          >
-            <img src={iconFavourite} alt="Szukaj" className="nav-icon-img" />
+          <link
+            rel="stylesheet"
+            href="font-awesome-4.6.3/css/font-awesome.min.css"
+          ></link>
+          <button className="nav-iconFav" onClick={() => console.log("Szukaj")}>
+            <img src={iconFavourite} alt="Szukaj" className="nav-iconFav-img" />
           </button>
           <button className="nav-icon" onClick={() => console.log("Profil")}>
-            👤
+            
           </button>
         </div>
       </nav>

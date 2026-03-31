@@ -82,21 +82,20 @@
   transition: background 0.2s;
 }
 
-.nav-icon-img {
-  width: 18px;
-  height: 18px;
+.nav-iconFav-img {
+  width: 24px;
   background: none;
   border: none;
   outline: none;
   object-fit: contain; /* To pilnuje, żeby obrazek się nie zgniótł */
 }
 
-.nav-icon-btn {
-  border: none;
+.nav-iconFav {
+  border: 1px solid #f9faf5;
 }
 
-.nav-icon-btn:hover {
-  border: 2px solid black;
+.nav-iconFav:hover {
+  border: 1px solid black;
 }
 
 .nav-icon:hover {
