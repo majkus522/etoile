@@ -1,68 +1,104 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+#root {
+  width: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  text-align: center;
+}
+
+.app-container {
+  width: 100vw;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 70px;
+  background-color: #f9faf5; /*kolor paska*/
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.nav-logo {
+  color: #000030;
+  font-family: "Canta one", serif;
+  font-weight: 1000;
+  transform: scaleY(1.1);
+  font-size: 1.8rem;
+  letter-spacing: 0px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #000000;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: color 0.2s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.nav-menu a:hover {
+  color: #646cff;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-logo {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-logo img {
+  width: 80px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.nav-icon {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  /*padding: 8px;*/
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav-icon-img {
+  width: 18px;
+  height: 18px;
+  background: none;
+  border: none;
+  outline: none;
+  object-fit: contain; /* To pilnuje, żeby obrazek się nie zgniótł */
+}
+
+.nav-icon-btn {
+  border: none;
+}
+
+.nav-icon-btn:hover {
+  border: 2px solid black;
+}
+
+.nav-icon:hover {
+  background-color: #333;
+}
+
+.main-content {
+  padding: 2rem;
 }
