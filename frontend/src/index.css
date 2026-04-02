@@ -8,6 +8,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  --navbar-height: 120px;
 }
 
 .app-container {
@@ -20,7 +21,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 2%;
-  height: 120px;
+  height: var(--navbar-height);
   background-color: #f9faf5; /*kolor paska*/
   border-bottom: 1px solid #0a1a4e;
   position: relative;
@@ -116,7 +117,7 @@
 
 .main-content {
   display: flex;
-  height: calc(100vh - 70px);
+  height: calc(100vh - var(--navbar-height));
   overflow: hidden; /*blokada scrolla*/
   background-color: #f9faf5;
   padding: 0;
