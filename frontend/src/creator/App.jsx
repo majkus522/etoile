@@ -147,7 +147,7 @@ function App() {
       width: "100%",
     },
     favoriteButton: {
-      height: "84px",
+      height: "60px",
       border: "2px solid #27314f",
       backgroundColor: "#f8f6f1",
       display: "flex",
@@ -158,7 +158,7 @@ function App() {
       width: "100%",
     },
     cartButton: {
-      height: "84px",
+      height: "60px",
       backgroundColor: "#0a1128",
       display: "flex",
       alignItems: "center",
