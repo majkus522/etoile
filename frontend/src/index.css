@@ -111,8 +111,32 @@
 }
 
 .main-content {
-  padding: 2rem;
+  display: flex;
+  height: calc(100vh - 70px);
+  overflow: hidden; /*blokada scrolla*/
   background-color: #f9faf5;
+  padding: 0;
+}
+
+.left-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.divider {
+  width: 1px;
+  background-color: #e2e3df;
+  height: 100%;
+  align-self: center;
+}
+
+.right-side {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
 }
 
 .card {
@@ -120,7 +144,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 20px;
+}
+
+.card img {
+  align-self: center; /* Zmieniłem na center, żeby pasowało do napisu CENA */
+  max-width: 100%;
+  height: auto;
 }
 
 .card-title {

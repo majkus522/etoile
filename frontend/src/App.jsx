@@ -23,10 +23,7 @@ function App() {
             <a href="#kreator">Kreator</a>
           </li>
           <li>
-            <a href="#kolekcje">Kolekcje</a>
-          </li>
-          <li>
-            <a href="#onas">O nas</a>
+            <a href="#blog">Blog</a>
           </li>
         </ul>
 
@@ -49,21 +46,56 @@ function App() {
           >
             <img src={iconCart} alt="Koszyk" className="nav-iconCart-img" />
           </a>
+          <a
+            href="#ulubione"
+            className="nav-icon"
+            onClick={() => console.log("Koszyk")}
+          >
+            <img src={iconCart} alt="Koszyk" className="nav-iconCart-img" />
+          </a>
         </div>
       </nav>
 
       <main className="main-content">
-        <div className="card">
-          <img
-            style={{ marginBottom: "30px" }}
-            src={iconSample}
-            alt="Przykład"
-            className="wyb-Sample-img"
-          />
-          <ht className="card-title">CENA CAŁKOWITA</ht>
-          <hp style={{ marginBottom: "30px" }} className="card-price">
-            6200 zł
-          </hp>
+        {/* LEWA STRONA */}
+        <div className="left-side">
+          <div className="card">
+            <img
+              style={{ marginBottom: "30px" }}
+              src={iconSample}
+              alt="Przykład"
+              className="wyb-Sample-img"
+            />
+            <h2 className="card-title">CENA CAŁKOWITA</h2>
+            <p style={{ marginBottom: "30px" }} className="card-price">
+              6200 zł
+            </p>
+          </div>
+        </div>
+
+        <div className="divider"></div>
+
+        {/* PRAWA STRONA */}
+        <div className="right-side">
+          <div className="scroll-content">
+            <h2>Wybór materiałów</h2>
+            {
+              <img
+                style={{ marginBottom: "30px" }}
+                src={iconFavourite}
+                alt="Przykład"
+                className="wyb-Sample-img"
+              />
+            }
+            <div
+              style={{
+                height: "1500px",
+                background: "linear-gradient(#f9faf5, #e2e3df)",
+              }}
+            >
+              Przewiń mnie w dół...
+            </div>
+          </div>
         </div>
       </main>
     </div>
