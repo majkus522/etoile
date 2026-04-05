@@ -107,6 +107,14 @@
   object-fit: contain;
 }
 
+.nav-iconAcc-img {
+  width: 40px;
+  background: none;
+  border: none;
+  outline: none;
+  object-fit: contain;
+}
+
 .nav-iconCart {
   border: 1px solid #f9faf5;
 }

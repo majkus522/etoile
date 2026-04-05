@@ -6,6 +6,7 @@ import "./App.css";
 import iconFavourite from "./assets/ulubione.png";
 import iconCart from "./assets/Cart.png";
 import iconLogo from "./assets/logo.png";
+import iconAcc from "./assets/account.png";
 import iconSample from "./assets/Sample.png";
 
 function App() {
@@ -31,27 +32,27 @@ function App() {
           <a
             href="#ulubione"
             className="nav-icon"
-            onClick={() => console.log("Ulubione")}
+            onClick={() => console.log("ulubione")}
           >
             <img
               src={iconFavourite}
-              alt="Ulubione"
+              alt="ulubione"
               className="nav-iconFav-img"
             />
           </a>
           <a
-            href="#ulubione"
+            href="#koszyk"
             className="nav-icon"
-            onClick={() => console.log("Koszyk")}
+            onClick={() => console.log("koszyk")}
           >
-            <img src={iconCart} alt="Koszyk" className="nav-iconCart-img" />
+            <img src={iconCart} alt="koszyk" className="nav-iconCart-img" />
           </a>
           <a
-            href="#ulubione"
+            href="#konto"
             className="nav-icon"
-            onClick={() => console.log("Koszyk")}
+            onClick={() => console.log("konto")}
           >
-            <img src={iconCart} alt="Koszyk" className="nav-iconCart-img" />
+            <img src={iconAcc} alt="konto" className="nav-iconAcc-img" />
           </a>
         </div>
       </nav>
