@@ -30,7 +30,7 @@ function App() {
 
         <div className="nav-actions">
           <a
-            href="#ulubione"
+            href="ulubione"
             className="nav-icon"
             onClick={() => console.log("ulubione")}
           >
@@ -41,14 +41,14 @@ function App() {
             />
           </a>
           <a
-            href="#koszyk"
+            href="koszyk"
             className="nav-icon"
             onClick={() => console.log("koszyk")}
           >
             <img src={iconCart} alt="koszyk" className="nav-iconCart-img" />
           </a>
           <a
-            href="#konto"
+            href="konto"
             className="nav-icon"
             onClick={() => console.log("konto")}
           >
