@@ -68,7 +68,7 @@ function App() {
               className="wyb-Sample-img"
             />
             <h2 className="card-title">CENA CAŁKOWITA</h2>
-            <p style={{ marginBottom: "100px" }} className="card-price">
+            <p style={{ marginBottom: "30px" }} className="card-price">
               6200 zł
             </p>
           </div>
