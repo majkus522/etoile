@@ -1,0 +1,48 @@
+/* Główny kontener strony */
+.appContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Playfair;
+  font-weight: 100;
+}
+
+/* Kontener dzielący ekran */
+.splitScreen {
+  display: flex;
+  flex: 1; /* Zajmuje całą dostępną przestrzeń pod navbarem */
+}
+
+/* Lewa strona - Logowanie */
+.loginSide {
+  flex: 1; /* Zajmuje 50% szerokości */
+  background-color: #fcfcfc; /* Bardzo jasny szary/biały */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Prawa strona - Rejestracja */
+.registerSide {
+  flex: 1; /* Zajmuje 50% szerokości */
+  background-color: #f2ede4; /* Ten beżowy kolor z Twojego projektu */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-left: 1px solid #d1d1d1; /* Delikatna linia oddzielająca */
+}
+
+/* Responsywność - na telefonach jedna pod drugą */
+@media (max-width: 768px) {
+  .splitScreen {
+    flex-direction: column;
+  }
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url("../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf");
+}

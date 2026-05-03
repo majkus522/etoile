@@ -1,0 +1,44 @@
+.formTitle {
+  color: #001540;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+/* --- LOGIN FORM --- */
+.loginContainer {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 30px;
+}
+
+.inputGroup input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #a0a0a0; /* Tylko dolna linia */
+  background: transparent;
+  padding: 10px 0;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.inputGroup input:focus {
+  border-bottom: 2px solid #001540;
+}
+
+.loginButton {
+  width: 100%;
+  background-color: #001540; /* Ciemny granat */
+  color: white;
+  padding: 15px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: opacity 0.3s;
+}
