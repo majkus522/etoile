@@ -12,13 +12,28 @@ router = APIRouter()
 @router.post("/")
 def add_to_cart(cart_item: CartCreate, token: Annotated[str | None, Header()] = None, db: Session = Depends(get_db)):
     user_id = get_current_user(token, db)
+
+    existing_item = db.query(Cart).filter(
+        and_(
+            Cart.user_id == user_id,
+            Cart.product_id == cart_item.product_id,
+            Cart.project_id == cart_item.project_id
+        )
+    ).first()
+
+    if existing_item:
+        existing_item.quantity += cart_item.quantity
+        db.commit()
+        db.refresh(existing_item)
+        return existing_item
+
     db_cart = Cart(
-        cart_item_id = cart_item.cart_item_id,
         user_id = user_id,
         product_id = cart_item.product_id,
         project_id = cart_item.project_id,
         quantity = cart_item.quantity
     )
+
     db.add(db_cart)
     db.commit()
     db.refresh(db_cart)
@@ -64,6 +79,6 @@ def delete_cart(
 
 # ========== zwracanie koszyka użytkownika ========== #
 @router.get("/")
-def get_cart(user_id: Annotated[str | None, Header()] = None, db: Session = Depends(get_db)
-):
+def get_cart(token: Annotated[str | None, Header()] = None, db: Session = Depends(get_db)):
+    user_id = get_current_user(token, db)
     return db.query(Cart).filter(Cart.user_id == user_id).all()
