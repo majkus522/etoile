@@ -9,7 +9,7 @@ class CustomProject(Base):
     name = Column(String)
     total_price = Column(Float)
     created_at = Column(DateTime)
-    category_id = Column(Integer, ForeignKey("categories.category_id"))
+    category_id = Column(Integer)
     metal = Column(String)
     project_size = Column(Integer)
     trinket1 = Column(String)

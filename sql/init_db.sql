@@ -33,7 +33,7 @@ CREATE TABLE Custom_Projects (
     name VARCHAR(255) NOT NULL,
     total_price DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    category_id INT REFERENCES Categories(category_id),
+    category_id INT,
     metal VARCHAR(50) not null,
     project_size int not null,
     trinket1 VARCHAR(50) not null,
