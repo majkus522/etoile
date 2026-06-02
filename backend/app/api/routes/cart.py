@@ -1,6 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, Header, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import and_
 from app.db.session import get_db
 from app.models.cart import Cart
 from app.schemas.cart import CartCreate, CartUpdate, CartDelete
