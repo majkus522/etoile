@@ -202,6 +202,7 @@ function App() {
 		});
 
 		console.log("STATUS:", res.status);
+		loadCart();
 	};
 
 	// ================= CHECKBOX =================
