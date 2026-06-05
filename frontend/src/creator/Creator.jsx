@@ -64,6 +64,9 @@ function Creator() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 				// Wysyłamy nagłówek autoryzacji identycznie jak w ulubionych!
 				token: localStorage.getItem("token"),
 			},
@@ -118,65 +121,70 @@ function Creator() {
 			<Navbar />
 			<main className="creator-page">
 				<div className="creator-wrapper">
-					<CreatorTitle />
-					<div
-						className="project-name-section"
-						style={{ margin: "20px 0", textAlign: "center" }}>
-						<label
-							htmlFor="projectName"
-							style={{ marginRight: "10px", fontWeight: "bold" }}>
-							Nazwa Twojego projektu:
-						</label>
-						<input
-							id="projectName"
-							type="text"
-							value={projectName}
-							onChange={(e) => setProjectName(e.target.value)}
-							disabled={loading}
-							style={{
-								padding: "5px 10px",
-								borderRadius: "4px",
-								border: "1px solid #ccc",
-							}}
-						/>
+					<div className="creator-layout">
+						<JewelryPreview />
+						<div className="creator-panel">
+							<CreatorTitle />
+							<div
+								className="project-name-section"
+								style={{ margin: "20px 0", textAlign: "center" }}>
+								<label
+									htmlFor="projectName"
+									style={{ marginRight: "10px", fontWeight: "bold" }}>
+									Nazwa Twojego projektu:
+								</label>
+								<input
+									id="projectName"
+									type="text"
+									value={projectName}
+									onChange={(e) => setProjectName(e.target.value)}
+									disabled={loading}
+									style={{
+										padding: "5px 10px",
+										borderRadius: "4px",
+										border: "1px solid #ccc",
+									}}
+								/>
+							</div>
+
+							<JewelryTypeSelector
+								selectedType={selectedType}
+								setSelectedType={setSelectedType}
+							/>
+
+							<MaterialSelector
+								selectedMaterial={selectedMaterial}
+								setSelectedMaterial={setSelectedMaterial}
+								isOpen={isOpen}
+								setIsOpen={setIsOpen}
+							/>
+
+							<LengthSelector
+								selectedType={selectedType}
+								selectedLength={selectedLength}
+								setSelectedLength={setSelectedLength}
+								isLengthOpen={isLengthOpen}
+								setIsLengthOpen={setIsLengthOpen}
+							/>
+
+							<CharmsSelector
+								selectedCharm1={selectedCharm1}
+								setSelectedCharm1={setSelectedCharm1}
+								selectedCharm2={selectedCharm2}
+								setSelectedCharm2={setSelectedCharm2}
+							/>
+
+							<PriceSummary
+								basePrice={basePrice}
+								charmsPrice={charmsPrice}
+								lengthPrice={lengthPrice}
+								metalPrice={metalPrice}
+								totalPrice={totalPrice}
+							/>
+
+							<CreatorActions finishProject={finishProject} loading={loading} />
+						</div>
 					</div>
-
-					<JewelryTypeSelector
-						selectedType={selectedType}
-						setSelectedType={setSelectedType}
-					/>
-
-					<MaterialSelector
-						selectedMaterial={selectedMaterial}
-						setSelectedMaterial={setSelectedMaterial}
-						isOpen={isOpen}
-						setIsOpen={setIsOpen}
-					/>
-
-					<LengthSelector
-						selectedType={selectedType}
-						selectedLength={selectedLength}
-						setSelectedLength={setSelectedLength}
-						isLengthOpen={isLengthOpen}
-						setIsLengthOpen={setIsLengthOpen}
-					/>
-
-					<CharmsSelector
-						selectedCharm1={selectedCharm1}
-						setSelectedCharm1={setSelectedCharm1}
-						selectedCharm2={selectedCharm2}
-						setSelectedCharm2={setSelectedCharm2}
-					/>
-
-					<PriceSummary
-						basePrice={basePrice}
-						charmsPrice={charmsPrice}
-						lengthPrice={lengthPrice}
-						metalPrice={metalPrice}
-						totalPrice={totalPrice}
-					/>
-
-					<CreatorActions finishProject={finishProject} loading={loading} />
 				</div>
 			</main>
 			<Footer />
