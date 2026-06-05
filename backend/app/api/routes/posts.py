@@ -7,6 +7,19 @@ from app.models.post import BlogPost
 
 router = APIRouter()
 
+# Pobieranie z bazy jednego posta (do podstrony)
+@router.get("/{post_id}")
+def get_post(post_id: int, db: Session = Depends(get_db)):
+    post = db.query(BlogPost).filter(BlogPost.post_id == post_id).first()
+
+    if not post:
+        raise HTTPException(
+            status_code=404,
+            detail="Post nie istnieje."
+        )
+
+    return post
+
 # Pobieranie z bazy określonej liczby postów
 @router.get("/")
 def get_posts(

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./Koszyk.css";
 
 import iconSample from "../assets/Sample.png";
@@ -71,72 +71,145 @@ const ElementListy = ({ product, onAdd }) => (
 
 function App() {
 	// Stan dla licznika sztuk
-	const [quantity, setQuantity] = useState(1);
+	const [produktyWKoszyku, setProduktyWKoszyku] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState("");
 
-	// Produkty w koszyku
-	const [produktyWKoszyku, setProduktyWKoszyku] = useState([
-		{
-			id: 1,
-			nazwa: "BRANSOLETKA SŁÓŃCE 45 CM ŻÓŁTE ZŁOTO",
-			cena: "6200",
-			ilosc: 1,
-			checked: true, // Dodane pole
-		},
-		{
-			id: 2,
-			nazwa: "PIERŚCIONEK DIAMENTOWY 585",
-			cena: "3500",
-			ilosc: 1,
-			checked: true,
-		},
-	]);
+	const [kosztDostawy, setKosztDostawy] = useState(12.99);
 
-	// FUNKCJA DODAWANIA DO KOSZYKA
-	const addToCart = (product) => {
-		setProduktyWKoszyku((prev) => {
-			// Sprawdzamy czy produkt już jest w koszyku
-			const exists = prev.find((p) => p.id === product.id + 100); // +100 aby uniknąć konfliktów ID z sugestii
-			if (exists) {
-				return prev.map((p) =>
-					p.id === product.id + 100 ? { ...p, ilosc: p.ilosc + 1 } : p
-				);
-			}
-			// Jeśli nie ma, dodajemy nowy obiekt
-			return [
-				...prev,
-				{
-					id: product.id + 100,
-					nazwa: product.title,
-					cena: product.price,
-					ilosc: 1,
-					checked: true,
-				},
-			];
+	useTitle("Etoile - Koszyk");
+
+	useEffect(() => {
+		loadCart();
+	}, []);
+
+	const loadCart = async () => {
+		const token = localStorage.getItem("token");
+
+		if (!token) {
+			setError("Musisz być zalogowany");
+			setLoading(false);
+			return;
+		}
+
+		try {
+			setLoading(true);
+			setError("");
+
+			const res = await fetch("http://localhost:8000/cart/", {
+				headers: { token },
+			});
+
+			const data = await res.json();
+
+			setProduktyWKoszyku(
+				data
+					.map((item) => ({
+						id: item.cart_item_id,
+						product_id: item.product_id,
+						ilosc: item.quantity,
+						cena: item.price,
+						nazwa: item.name,
+						zdjecie: item.image,
+						checked: false,
+					}))
+					.sort((a, b) => a.id - b.id)
+			);
+		} catch (err) {
+			setError("Błąd pobierania koszyka");
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	// ================= PATCH + =================
+	const increment = async (id) => {
+		const item = produktyWKoszyku.find((p) => p.id === id);
+		if (!item) return;
+
+		await fetch("http://localhost:8000/cart/", {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				cart_item_id: id,
+				quantity: item.ilosc + 1,
+			}),
 		});
+
+		loadCart();
 	};
 
-	// Funkcje do zmiany ilości
-	const increment = (id) => {
-		setProduktyWKoszyku((prev) =>
-			prev.map((p) => (p.id === id ? { ...p, ilosc: p.ilosc + 1 } : p))
+	// ================= PATCH - =================
+	const decrement = async (id) => {
+		const item = produktyWKoszyku.find((p) => p.id === id);
+		if (!item || item.ilosc <= 1) return;
+
+		await fetch("http://localhost:8000/cart/", {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				cart_item_id: id,
+				quantity: item.ilosc - 1,
+			}),
+		});
+
+		loadCart();
+	};
+
+	// ================= DELETE =================
+	const removeSelected = async () => {
+		const selected = produktyWKoszyku.filter((p) => p.checked);
+
+		await Promise.all(
+			selected.map((item) =>
+				fetch("http://localhost:8000/cart/", {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						cart_item_id: item.id,
+					}),
+				})
+			)
 		);
+
+		loadCart();
 	};
 
-	const decrement = (id) => {
-		setProduktyWKoszyku((prev) =>
-			prev.map((p) => (p.id === id ? { ...p, ilosc: Math.max(1, p.ilosc - 1) } : p))
-		);
+	const addToCart = async (item) => {
+		const token = localStorage.getItem("token");
+
+		const payload = {
+			product_id: item.product_id,
+			project_id: item.project_id,
+			quantity: 1,
+		};
+
+		console.log("➡️ ADD ONE ITEM:", payload);
+
+		const res = await fetch("http://localhost:8000/cart/", {
+			method: "POST",
+			headers: {
+				token,
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload),
+		});
+
+		console.log("STATUS:", res.status);
+		loadCart();
 	};
 
-	// Obsługa zaznaczania pojedynczego produktu
+	// ================= CHECKBOX =================
 	const toggleCheck = (id) => {
 		setProduktyWKoszyku((prev) =>
 			prev.map((p) => (p.id === id ? { ...p, checked: !p.checked } : p))
 		);
-	};
-
-	const removeSelected = () => {
-		setProduktyWKoszyku((prev) => prev.filter((p) => !p.checked));
 	};
 
 	const suggestedProducts = [
@@ -151,7 +224,6 @@ function App() {
 		0
 	);
 
-	const [kosztDostawy, setKosztDostawy] = useState(12.99);
 	const handleKosztDostawy = (element) => {
 		setKosztDostawy(element);
 	};

@@ -4,7 +4,6 @@ from pydantic import BaseModel
 from typing import Optional
 
 class CartCreate(BaseModel):
-    user_id: int
     product_id: Optional[int] = None
     project_id: Optional[int] = None
     quantity: int

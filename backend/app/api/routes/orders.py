@@ -7,6 +7,7 @@ from app.models.cart import Cart
 from app.models.order import Order
 from app.models.order_item import OrderItem
 from app.schemas.order import OrderUpdate, OrderDelete
+from app.core.security import get_current_user
 
 # ================ #
 # obsługa zamówień #
@@ -16,12 +17,13 @@ router = APIRouter()
 # ========== dodawanie zamówienia ========== #
 @router.post("/")
 def create_order(
-    user_id: Annotated[int | None, Header()],
+    token: Annotated[int | None, Header()],
     db: Session = Depends(get_db)
 ):
     # =========================
     # pobranie koszyka użytkownika
     # =========================
+    user_id = get_current_user(token, db)
     cart_items = (
         db.query(Cart)
         .filter(Cart.user_id == user_id)
