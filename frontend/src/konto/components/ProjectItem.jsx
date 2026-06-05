@@ -8,6 +8,9 @@ export default function ProjectItem({ item }) {
 			headers: {
 				Token: localStorage.getItem("token"),
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 		});
 		location.reload();
@@ -19,6 +22,9 @@ export default function ProjectItem({ item }) {
 			headers: {
 				Token: localStorage.getItem("token"),
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify({ project_id: item.project_id, quantity: 1, product_id: null }),
 		});

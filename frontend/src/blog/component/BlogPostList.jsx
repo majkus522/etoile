@@ -17,7 +17,15 @@ export default function BlogPostList() {
 				setError("");
 
 				const response = await fetch(
-					`http://localhost:8000/posts/?page=${currentPage}&limit=${postsPerPage}`
+					`http://localhost:8000/posts/?page=${currentPage}&limit=${postsPerPage}`,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							"Access-Control-Allow-Origin": "",
+							"Access-Control-Allow-Methods": "",
+							"Access-Control-Allow-Headers": "*",
+						},
+					}
 				);
 
 				if (!response.ok) {

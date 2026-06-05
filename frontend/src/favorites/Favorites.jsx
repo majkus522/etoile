@@ -46,6 +46,10 @@ function Favorites() {
 			const response = await fetch("http://localhost:8000/favorites/", {
 				headers: {
 					token: localStorage.getItem("token"),
+					"Access-Control-Allow-Origin": "",
+					"Access-Control-Allow-Methods": "",
+					"Access-Control-Allow-Headers": "*",
+					"Content-Type": "application/json",
 				},
 			});
 
@@ -106,6 +110,9 @@ function Favorites() {
 						headers: {
 							token: localStorage.getItem("token"),
 							"Content-Type": "application/json",
+							"Access-Control-Allow-Origin": "",
+							"Access-Control-Allow-Methods": "",
+							"Access-Control-Allow-Headers": "*",
 						},
 						body: JSON.stringify({
 							favorite_id: item.favorite_id,
@@ -146,8 +153,11 @@ function Favorites() {
 					const res = await fetch("http://localhost:8000/cart/", {
 						method: "POST",
 						headers: {
-							token,
+							Token: localStorage.getItem("token"),
 							"Content-Type": "application/json",
+							"Access-Control-Allow-Origin": "",
+							"Access-Control-Allow-Methods": "",
+							"Access-Control-Allow-Headers": "*",
 						},
 						body: JSON.stringify(payload),
 					});
@@ -186,8 +196,11 @@ function Favorites() {
 		const res = await fetch("http://localhost:8000/cart/", {
 			method: "POST",
 			headers: {
-				token,
+				Token: localStorage.getItem("token"),
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify(payload),
 		});

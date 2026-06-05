@@ -20,7 +20,14 @@ export default function BlogPostPage() {
 				setLoading(true);
 				setError("");
 
-				const response = await fetch(`http://localhost:8000/posts/${id}`);
+				const response = await fetch(`http://localhost:8000/posts/${id}`, {
+					headers: {
+						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "",
+						"Access-Control-Allow-Methods": "",
+						"Access-Control-Allow-Headers": "*",
+					},
+				});
 
 				if (response.status === 404) {
 					throw new Error("Nie znaleziono posta.");
@@ -55,6 +62,10 @@ export default function BlogPostPage() {
 					method: "GET",
 					headers: {
 						token: localStorage.getItem("token"),
+						"Access-Control-Allow-Origin": "",
+						"Access-Control-Allow-Methods": "",
+						"Access-Control-Allow-Headers": "*",
+						"Content-Type": "application/json",
 					},
 				});
 
@@ -88,6 +99,9 @@ export default function BlogPostPage() {
 					headers: {
 						"Content-Type": "application/json",
 						token: localStorage.getItem("token"),
+						"Access-Control-Allow-Origin": "",
+						"Access-Control-Allow-Methods": "",
+						"Access-Control-Allow-Headers": "*",
 					},
 					body: JSON.stringify({
 						favorite_id: favoriteId,
@@ -107,6 +121,9 @@ export default function BlogPostPage() {
 					headers: {
 						"Content-Type": "application/json",
 						token: localStorage.getItem("token"),
+						"Access-Control-Allow-Origin": "",
+						"Access-Control-Allow-Methods": "",
+						"Access-Control-Allow-Headers": "*",
 					},
 					body: JSON.stringify({
 						product_id: null,

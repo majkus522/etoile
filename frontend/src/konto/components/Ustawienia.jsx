@@ -32,6 +32,10 @@ export default function Ustawienia() {
 			method: "DELETE",
 			headers: {
 				Token: localStorage.getItem("token"),
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
+				"Content-Type": "application/json",
 			},
 		});
 		localStorage.removeItem("token");
@@ -55,6 +59,10 @@ export default function Ustawienia() {
 			method: "PATCH",
 			headers: {
 				Token: localStorage.getItem("token"),
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify(newData),
 		});
@@ -68,6 +76,9 @@ export default function Ustawienia() {
 				headers: {
 					"Content-Type": "application/json",
 					Token: localStorage.getItem("token"),
+					"Access-Control-Allow-Origin": "",
+					"Access-Control-Allow-Methods": "",
+					"Access-Control-Allow-Headers": "*",
 				},
 			});
 			setData(await response.json());
