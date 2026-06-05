@@ -64,6 +64,9 @@ function Creator() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 				// Wysyłamy nagłówek autoryzacji identycznie jak w ulubionych!
 				token: localStorage.getItem("token"),
 			},
