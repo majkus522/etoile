@@ -11,6 +11,8 @@ export default function BlogPostPage() {
 	const [error, setError] = useState("");
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [favoriteId, setFavoriteId] = useState(null);
+	const [projectId, setProjectId] = useState(null);
+	const [favCount, setFavCount] = useState(0);
 
 	useEffect(() => {
 		async function fetchPost() {
@@ -33,6 +35,8 @@ export default function BlogPostPage() {
 
 				const data = await response.json();
 				setPost(data);
+				setProjectId(data.project_id);
+				setFavCount(data.fav);
 			} catch (err) {
 				setError(err.message);
 			} finally {
@@ -44,8 +48,9 @@ export default function BlogPostPage() {
 	}, [id]);
 
 	useEffect(() => {
-		const loadFavorites = async () => {
+		async function loadFavorites() {
 			try {
+				console.log("Ładowanie ulubionych dla projektu:", projectId);
 				const response = await fetch("http://localhost:8000/favorites", {
 					method: "GET",
 					headers: {
@@ -70,7 +75,7 @@ export default function BlogPostPage() {
 			} catch (err) {
 				console.error(err);
 			}
-		};
+		}
 
 		loadFavorites();
 	}, [post]);
@@ -95,6 +100,7 @@ export default function BlogPostPage() {
 
 				setIsFavorite(false);
 				setFavoriteId(null);
+				setFavCount((prev) => prev - 1);
 			} else {
 				const response = await fetch("http://localhost:8000/favorites", {
 					method: "POST",
@@ -104,7 +110,7 @@ export default function BlogPostPage() {
 					},
 					body: JSON.stringify({
 						product_id: null,
-						project_id: id,
+						project_id: projectId,
 					}),
 				});
 
@@ -116,6 +122,7 @@ export default function BlogPostPage() {
 
 				setIsFavorite(true);
 				setFavoriteId(data.favorite_id);
+				setFavCount((prev) => prev + 1);
 			}
 		} catch (err) {
 			console.error(err);
@@ -141,7 +148,15 @@ export default function BlogPostPage() {
 				<h1 className="single-post-title">{post.title}</h1>
 				{localStorage.getItem("token") && (
 					<button className="favorite-btn" onClick={toggleFavorite}>
-						{isFavorite ? "★" : "☆"}
+						{favCount}
+						<img
+							src={
+								isFavorite
+									? "/src/assets/ulubione-fill.png"
+									: "/src/assets/ulubione.png"
+							}
+							alt="ulubione"
+							class="nav-iconFav-img"></img>
 					</button>
 				)}
 			</div>

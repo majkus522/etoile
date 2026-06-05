@@ -13,7 +13,14 @@
 	border: none;
 	font-size: 32px;
 	cursor: pointer;
-	color: gold;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.favorite-btn img {
+	width: 32px;
+	height: 32px;
 }
 
 .single-post-back {
