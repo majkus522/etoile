@@ -5,6 +5,9 @@ from app.models.product import Product
 from app.schemas.product import ProductFilter, ProductName
 
 router = APIRouter()
+@router.get("/")
+def get_all_products(db: Session = Depends(get_db)):
+    return db.query(Product).all()
 
 @router.get("/")
 def get_products(product_id: ProductFilter, db: Session = Depends(get_db)):

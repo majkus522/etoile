@@ -96,6 +96,7 @@ function Favorites() {
 						product_id: item.product_id,
 						project_id: item.project_id,
 						checked: true,
+						seller: details.seller || "Etoile_Jewelry",
 						title: details.title || "Brak nazwy",
 						price: item.price || 0,
 					};
