@@ -100,7 +100,7 @@ function Creator() {
 			console.log(payload);
 
 			const result = await finishProjectApi(payload);
-			alert(`${result.msg}! ID projektu: ${result.project_id}`);
+			alert(`Projekt utworzony!`);
 
 			// Reset formularza
 			setProjectName("Mój Projekt Biżuterii");

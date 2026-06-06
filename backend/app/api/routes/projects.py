@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.models.project import CustomProject
-from app.schemas.project import ProjectCreate
+from app.schemas.project import ProjectCreate, ProjectName
 from app.core.security import get_current_user
 from datetime import datetime
 
@@ -50,3 +50,8 @@ def delete_project(project_id: int, token: Annotated[str | None, Header()] = Non
     db.commit()
 
     return {"msg": "deleted"}
+
+@router.get("/")
+def get_project_by_name(project_name: ProjectName, token: Annotated[str | None, Header()] = None, db: Session = Depends(get_db)):
+    user_id = get_current_user(token, db)
+    return db.query(CustomProject).filter(CustomProject.name == project_name.name, CustomProject.user_id == user_id).first()

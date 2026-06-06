@@ -15,7 +15,6 @@ const FavoritesItem = ({ product, onToggleCheck, onAddToCart }) => {
 			</a>
 			<div className="fav-product-info">
 				<p className="fav-product-name">{product.title}</p>
-				<span className="fav-seller-tag">od {product.seller}</span>
 				<div className="fav-product-row" style={{ marginTop: "10px" }}>
 					<span className="fav-price-big">{product.price} zł</span>
 					<button

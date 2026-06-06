@@ -59,16 +59,48 @@ function Favorites() {
 
 			const data = await response.json();
 
-			const favorites = data.map((item) => ({
-				...item,
-				id: item.favorite_id,
-				product_id: item.product_id,
-				project_id: item.project_id,
-				checked: true,
-				title: item.title || `Ulubiony element #${item.favorite_id}`,
-				price: item.price || 0,
-				seller: item.seller || "Etoile_Jewelry",
-			}));
+			const favorites = await Promise.all(
+				data.map(async (item) => {
+					let details = {};
+
+					if (item.product_id === null) {
+						const res = await fetch("http://localhost:8000/projects/", {
+							headers: {
+								item: item.project_id,
+								Token: localStorage.getItem("token"),
+								"Content-Type": "application/json",
+								"Access-Control-Allow-Origin": "",
+								"Access-Control-Allow-Methods": "",
+								"Access-Control-Allow-Headers": "*",
+							},
+						});
+
+						details = await res.json();
+					} else {
+						const res = await fetch("http://localhost:8000/products/", {
+							headers: {
+								item: item.product_id,
+								Token: localStorage.getItem("token"),
+								"Content-Type": "application/json",
+								"Access-Control-Allow-Origin": "",
+								"Access-Control-Allow-Methods": "",
+								"Access-Control-Allow-Headers": "*",
+							},
+						});
+
+						details = await res.json();
+					}
+					return {
+						...item,
+						id: item.favorite_id,
+						product_id: item.product_id,
+						project_id: item.project_id,
+						checked: true,
+						title: details.title || "Brak nazwy",
+						price: item.price || 0,
+					};
+				})
+			);
 
 			console.log(favorites);
 
@@ -164,7 +196,7 @@ function Favorites() {
 
 					console.log("⬅️ STATUS:", res.status);
 
-					const text = await res.text(); // 🔥 ważne (nie json na start)
+					const text = await res.text();
 					console.log("⬅️ RESPONSE:", text);
 
 					if (!res.ok) {
