@@ -9,8 +9,10 @@ import FavoritesSuggestions from "./components/FavoritesSuggestions.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer";
 import { useTitle } from "../main.jsx";
+import { Navigate } from "react-router-dom";
 
 function Favorites() {
+	if (localStorage.getItem("token") == null) return <Navigate to="/" replace />;
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
@@ -44,6 +46,10 @@ function Favorites() {
 			const response = await fetch("http://localhost:8000/favorites/", {
 				headers: {
 					token: localStorage.getItem("token"),
+					"Access-Control-Allow-Origin": "",
+					"Access-Control-Allow-Methods": "",
+					"Access-Control-Allow-Headers": "*",
+					"Content-Type": "application/json",
 				},
 			});
 
@@ -104,6 +110,9 @@ function Favorites() {
 						headers: {
 							token: localStorage.getItem("token"),
 							"Content-Type": "application/json",
+							"Access-Control-Allow-Origin": "",
+							"Access-Control-Allow-Methods": "",
+							"Access-Control-Allow-Headers": "*",
 						},
 						body: JSON.stringify({
 							favorite_id: item.favorite_id,
@@ -144,8 +153,11 @@ function Favorites() {
 					const res = await fetch("http://localhost:8000/cart/", {
 						method: "POST",
 						headers: {
-							token,
+							Token: localStorage.getItem("token"),
 							"Content-Type": "application/json",
+							"Access-Control-Allow-Origin": "",
+							"Access-Control-Allow-Methods": "",
+							"Access-Control-Allow-Headers": "*",
 						},
 						body: JSON.stringify(payload),
 					});
@@ -184,8 +196,11 @@ function Favorites() {
 		const res = await fetch("http://localhost:8000/cart/", {
 			method: "POST",
 			headers: {
-				token,
+				Token: localStorage.getItem("token"),
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify(payload),
 		});

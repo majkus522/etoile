@@ -12,6 +12,9 @@ export default function ProjectList() {
 				headers: {
 					"Content-Type": "application/json",
 					Token: localStorage.getItem("token"),
+					"Access-Control-Allow-Origin": "",
+					"Access-Control-Allow-Methods": "",
+					"Access-Control-Allow-Headers": "*",
 				},
 			});
 			setData(await response.json());

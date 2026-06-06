@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import "./Koszyk.css";
-
 import iconSample from "../assets/Sample.png";
 import iconProt from "../assets/Elogo.png";
 import Navbar from "../components/Navbar";
@@ -8,6 +7,7 @@ import Footer from "../components/Footer";
 import { useTitle } from "../main.jsx";
 import Platnosc from "./placeholders/Platnosc.jsx";
 import Dostawa from "./placeholders/Dostawa.jsx";
+import { Navigate } from "react-router-dom";
 
 const CartItem = ({ title, price }) => (
 	<div className="item">
@@ -70,6 +70,7 @@ const ElementListy = ({ product, onAdd }) => (
 );
 
 function App() {
+	if (localStorage.getItem("token") == null) return <Navigate to="/" replace />;
 	// Stan dla licznika sztuk
 	const [produktyWKoszyku, setProduktyWKoszyku] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -97,7 +98,13 @@ function App() {
 			setError("");
 
 			const res = await fetch("http://localhost:8000/cart/", {
-				headers: { token },
+				headers: {
+					"Content-Type": "application/json",
+					Token: localStorage.getItem("token"),
+					"Access-Control-Allow-Origin": "",
+					"Access-Control-Allow-Methods": "",
+					"Access-Control-Allow-Headers": "*",
+				},
 			});
 
 			const data = await res.json();
@@ -131,6 +138,9 @@ function App() {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify({
 				cart_item_id: id,
@@ -150,6 +160,9 @@ function App() {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify({
 				cart_item_id: id,
@@ -170,6 +183,9 @@ function App() {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "",
+						"Access-Control-Allow-Methods": "",
+						"Access-Control-Allow-Headers": "*",
 					},
 					body: JSON.stringify({
 						cart_item_id: item.id,
@@ -195,8 +211,11 @@ function App() {
 		const res = await fetch("http://localhost:8000/cart/", {
 			method: "POST",
 			headers: {
-				token,
+				Token: localStorage.getItem("token"),
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "",
+				"Access-Control-Allow-Methods": "",
+				"Access-Control-Allow-Headers": "*",
 			},
 			body: JSON.stringify(payload),
 		});

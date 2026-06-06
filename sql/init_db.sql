@@ -75,12 +75,6 @@ CREATE TABLE Blog_Posts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Post_Likes (
-    like_id SERIAL PRIMARY KEY,
-    post_id INT REFERENCES Blog_Posts(post_id) ON DELETE CASCADE,
-    user_id INT REFERENCES Users(user_id)
-);
-
 CREATE TABLE Favorites (
     favorite_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id),

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from datetime import datetime
+from app.models.favorite import Favorite
 
 from app.db.session import get_db
 from app.models.post import BlogPost
@@ -17,6 +18,8 @@ def get_post(post_id: int, db: Session = Depends(get_db)):
             status_code=404,
             detail="Post nie istnieje."
         )
+
+    post.fav = db.query(Favorite).filter(Favorite.project_id == post.project_id).count()
 
     return post
 
