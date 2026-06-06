@@ -5,6 +5,7 @@ import ProductsHeader from "./componenty/ProductsHeader.jsx";
 import ProductsGrid from "./componenty/ProductsGrid.jsx";
 
 import "./Products.css";
+import { useEffect, useState } from "react";
 
 function Products() {
 	useEffect(() => {
