@@ -15,6 +15,14 @@ export default function BlogPostPage() {
 	const [favCount, setFavCount] = useState(0);
 
 	useEffect(() => {
+		setPost(null);
+		setIsFavorite(false);
+		setFavoriteId(null);
+		setProjectId(null);
+		setFavCount(0);
+	}, [id]);
+
+	useEffect(() => {
 		async function fetchPost() {
 			try {
 				setLoading(true);
@@ -78,18 +86,22 @@ export default function BlogPostPage() {
 				console.log(data);
 
 				console.log("Znaleziony ulubiony:", data);
-				if (data.length > 0) {
-					console.log("Znaleziony ulubiony:", data);
+				const fav = data.find((f) => f.project_id === projectId);
+				if (fav) {
 					setIsFavorite(true);
-					setFavoriteId(data[0].favorite_id);
+					setFavoriteId(fav.favorite_id);
+				} else {
+					setIsFavorite(false);
+					setFavoriteId(null);
 				}
+				console.log("isFavorite ustawione na:", isFavorite);
 			} catch (err) {
 				console.error(err);
 			}
 		}
 
 		loadFavorites();
-	}, [post]);
+	}, [projectId]);
 
 	const toggleFavorite = async () => {
 		try {
@@ -173,7 +185,7 @@ export default function BlogPostPage() {
 									: "/src/assets/ulubione.png"
 							}
 							alt="ulubione"
-							class="nav-iconFav-img"></img>
+							className="nav-iconFav-img"></img>
 					</button>
 				)}
 			</div>
