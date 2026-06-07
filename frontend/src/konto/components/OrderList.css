@@ -1,0 +1,331 @@
+/* Główne style kontenerów strony OrderList */
+.ol-page-container {
+	background-color: #f9faf5;
+	width: 100%;
+	min-height: 100vh;
+	padding: 30px 0;
+}
+
+.ol-layout {
+	display: flex;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+	text-align: left;
+}
+
+.ol-main {
+	flex: 1;
+}
+
+.ol-heading {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 1.5rem;
+	color: #111;
+}
+
+.ol-subheading {
+	font-size: 1.6rem;
+	font-weight: 600;
+	margin-top: 40px;
+	margin-bottom: 1.2rem;
+}
+
+.ol-white-card {
+	background: #fff;
+	border-radius: 16px;
+	padding: 24px;
+	margin-bottom: 30px;
+}
+
+.ol-shadow {
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Górny pasek zarządzania */
+.ol-top-bar {
+	font-size: 20px;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+}
+
+.ol-text-btn {
+	background: none;
+	border: none;
+	color: #00a5a5;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	text-transform: uppercase;
+	padding: 0;
+	transition: 0.2s;
+}
+
+.ol-text-btn:hover {
+	color: #007a7a;
+	text-decoration: underline;
+}
+
+/* Gwiazdki jako checkbox */
+.ol-star-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+}
+
+.ol-star-checkbox input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.ol-star-icon {
+	display: inline-block;
+	position: relative;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	vertical-align: middle;
+	transition:
+		transform 0.2s,
+		rotate 0.3s ease;
+	margin-right: 8px;
+}
+
+.ol-star-napis {
+	text-transform: uppercase;
+	font-size: 13px;
+	color: #666;
+}
+
+.ol-star-checkbox:hover .ol-star-icon {
+	transform: scale(1.2);
+	rotate: 20deg;
+}
+
+.ol-star-icon::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: 15px solid #ccc;
+	clip-path: polygon(
+		50% 0%,
+		61% 35%,
+		98% 35%,
+		68% 57%,
+		79% 91%,
+		50% 70%,
+		21% 91%,
+		32% 57%,
+		2% 35%,
+		39% 35%
+	);
+	transition:
+		background-color 0.2s,
+		border-color 0.2s;
+	box-sizing: border-box;
+}
+
+.ol-star-checkbox input:checked ~ .ol-star-icon::before {
+	background-color: #0a1a4e;
+	border-color: #0a1a4e;
+}
+
+/* Bieżące produkty */
+.ol-delivery-section {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.ol-product {
+	display: flex;
+	gap: 15px;
+	align-items: flex-start;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #f5f5f5;
+	padding-bottom: 15px;
+}
+
+.ol-product:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.ol-preview-box {
+	width: 100px;
+	height: 100px;
+	background: white;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ol-preview-box img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.ol-product-info {
+	flex: 1;
+}
+
+.ol-product-name {
+	font-size: 14px;
+	text-align: left;
+	margin-bottom: 5px;
+	font-weight: 500;
+}
+
+.ol-seller-tag {
+	font-size: 12px;
+	color: #666;
+}
+
+.ol-product-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ol-price-big {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* Sekcja Historii Zamówień */
+.ol-history-section {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.ol-history-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.ol-history-row:last-child {
+	border-bottom: none;
+}
+
+.ol-history-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	flex: 2;
+}
+
+.ol-history-number {
+	font-weight: bold;
+	font-size: 15px;
+	color: #111;
+}
+
+.ol-history-date {
+	font-size: 12px;
+	color: #888;
+}
+
+.ol-history-summary-text {
+	font-size: 13px;
+	color: #555;
+	margin-top: 2px;
+}
+
+.ol-history-status-container {
+	display: flex;
+	gap: 10px;
+	flex: 2;
+	justify-content: center;
+}
+
+.ol-history-price {
+	font-size: 16px;
+	font-weight: bold;
+	color: #0a1a4e;
+	flex: 1;
+	text-align: right;
+}
+
+/* Badges / Statusy */
+.ol-badge {
+	padding: 6px 12px;
+	border-radius: 20px;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	display: inline-block;
+	text-align: center;
+	min-width: 100px;
+}
+
+.ol-badge-success {
+	background-color: #e6f4ea;
+	color: #137333;
+}
+.ol-badge-danger {
+	background-color: #fce8e6;
+	color: #c5221f;
+}
+.ol-badge-info {
+	background-color: #e8f0fe;
+	color: #1a73e8;
+}
+.ol-badge-warning {
+	background-color: #fef7e0;
+	color: #b06000;
+}
+
+/* Responsywność mobilna */
+@media (max-width: 768px) {
+	.ol-heading {
+		font-size: 22px;
+	}
+	.ol-subheading {
+		font-size: 18px;
+		margin-top: 25px;
+	}
+	.ol-preview-box {
+		width: 70px;
+		height: 70px;
+	}
+	.ol-price-big {
+		font-size: 17px;
+	}
+
+	.ol-history-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+
+	.ol-history-status-container {
+		justify-content: flex-start;
+		width: 100%;
+	}
+
+	.ol-history-price {
+		text-align: left;
+		width: 100%;
+		border-top: 1px dashed #f0f0f0;
+		padding-top: 8px;
+	}
+}
