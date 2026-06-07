@@ -16,6 +16,7 @@ def create_project(project: ProjectCreate, token: Annotated[str | None, Header()
     new_project = CustomProject(
         user_id=user_id,
         name = project.name,
+        image_path = project.image_path,
         total_price = project.total_price,
         created_at=datetime.utcnow(),
         category_id = project.category_id,

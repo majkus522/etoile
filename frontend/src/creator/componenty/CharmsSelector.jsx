@@ -1,19 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CharmsSelector.css";
 
 const charmOptions1 = [
-	{ id: "heart", name: "Serce", icon: "♥" },
-	{ id: "star", name: "Gwiazdka", icon: "★" },
-	{ id: "cross", name: "Krzyż", icon: "✚" },
-	{ id: "sun", name: "Słońce", icon: "☀" },
-	{ id: "clover", name: "Koniczyna", icon: "☘" },
-	{ id: "infinity", name: "Nieskończoność", icon: "∞" },
-	{ id: "moon", name: "Księżyc", icon: "☾" },
+	{ id: "serce", name: "Serce", icon: "♥" },
+	{ id: "gwiazda", name: "Gwiazdka", icon: "★" },
+	{ id: "krzyż", name: "Krzyż", icon: "✚" },
+	{ id: "słońce", name: "Słońce", icon: "☀" },
+	{ id: "koniczyna", name: "Koniczyna", icon: "☘" },
+	{ id: "nieskończoność", name: "Nieskończoność", icon: "∞" },
+	{ id: "księżyc", name: "Księżyc", icon: "☾" },
 ];
 
 const charmOptions2 = [...charmOptions1, { id: "none", name: "Brak", icon: "" }];
 
-function CharmsSelector({ selectedCharm1, setSelectedCharm1, selectedCharm2, setSelectedCharm2 }) {
+function CharmsSelector({
+	selectedCharm1,
+	setSelectedCharm1,
+	selectedCharm2,
+	setSelectedCharm2,
+	isNecklace,
+}) {
+	useEffect(() => {
+		if (isNecklace) {
+			setSelectedCharm2("none");
+		}
+	}, [isNecklace]);
 	const [isCharmsOpen, setIsCharmsOpen] = useState(true);
 
 	return (
@@ -62,26 +73,28 @@ function CharmsSelector({ selectedCharm1, setSelectedCharm1, selectedCharm2, set
 						</div>
 					</div>
 
-					<div className="charms-group">
-						<h3 className="charms-group-title">Zawieszka 2</h3>
+					{!isNecklace && (
+						<div className="charms-group">
+							<h3 className="charms-group-title">Zawieszka 2</h3>
 
-						<div className="charms-grid">
-							{charmOptions2.map((charm) => (
-								<button
-									key={charm.id}
-									type="button"
-									onClick={() => setSelectedCharm2(charm.id)}
-									className={`charm-card ${
-										selectedCharm2 === charm.id ? "charm-card-active" : ""
-									}`}>
-									<span className="charm-icon charm-icon-secondary">
-										{charm.icon}
-									</span>
-									<span className="charm-name">{charm.name}</span>
-								</button>
-							))}
+							<div className="charms-grid">
+								{charmOptions2.map((charm) => (
+									<button
+										key={charm.id}
+										type="button"
+										onClick={() => setSelectedCharm2(charm.id)}
+										className={`charm-card ${
+											selectedCharm2 === charm.id ? "charm-card-active" : ""
+										}`}>
+										<span className="charm-icon charm-icon-secondary">
+											{charm.icon}
+										</span>
+										<span className="charm-name">{charm.name}</span>
+									</button>
+								))}
+							</div>
 						</div>
-					</div>
+					)}
 
 					<div className="charms-bottom-line" />
 				</>

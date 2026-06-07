@@ -7,6 +7,7 @@ class CustomProject(Base):
     project_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.user_id"))
     name = Column(String)
+    image_path = Column(String)
     total_price = Column(Float)
     created_at = Column(DateTime)
     category_id = Column(Integer)

@@ -15,6 +15,11 @@ import { useTitle } from "../main.jsx";
 import { materials } from "./materialsData.js";
 import { Navigate } from "react-router-dom";
 
+const images = import.meta.glob("/src/assets/creator/**/*.{png,jpg,jpeg,webp}", {
+	eager: true,
+	import: "default",
+});
+
 function Creator() {
 	if (localStorage.getItem("token") == null) return <Navigate to="/" replace />;
 	// Istniejące stany konfiguracji
@@ -23,8 +28,9 @@ function Creator() {
 	const [selectedType, setSelectedType] = useState("bracelet");
 	const [selectedLength, setSelectedLength] = useState("18 cm");
 	const [isLengthOpen, setIsLengthOpen] = useState(true);
-	const [selectedCharm1, setSelectedCharm1] = useState("heart");
+	const [selectedCharm1, setSelectedCharm1] = useState("serce");
 	const [selectedCharm2, setSelectedCharm2] = useState("none");
+	const isNecklace = selectedType === "necklace";
 
 	// NOWE STANY: Potrzebne do obsługi formularza i zapisu
 	const [projectName, setProjectName] = useState("Mój Projekt Biżuterii");
@@ -54,6 +60,29 @@ function Creator() {
 		},
 	};
 
+	const getImagePath = () => {
+		const jewelryFolder = selectedType === "bracelet" ? "Bransoletka" : "Naszyjnik";
+
+		const rawMaterial = materials[selectedMaterial - 1].name;
+
+		const silverLike = ["Srebro", "Platyna", "Złoto białe"];
+
+		const materialFolder = silverLike.includes(rawMaterial)
+			? "Srebro"
+			: materials[selectedMaterial - 1].name;
+
+		const isTwoCharms = selectedType === "bracelet" && selectedCharm2 !== "none";
+
+		const charmsFolder = isTwoCharms ? "2z" : "1z";
+
+		const fileName = isTwoCharms
+			? `${selectedCharm1}-${selectedCharm2}.png`
+			: `${selectedCharm1}.png`;
+
+		return `/src/assets/creator/${jewelryFolder}/${materialFolder}/${charmsFolder}/${fileName}`;
+	};
+
+	const previewImage = images[getImagePath()] || null;
 	const lengthPrice = lengthPrices[selectedType]?.[selectedLength] ?? 0;
 	const charmPrice = 800;
 	const charmsPrice = charmPrice + (selectedCharm2 === "none" ? 0 : charmPrice);
@@ -75,6 +104,7 @@ function Creator() {
 		});
 
 		if (!response.ok) {
+			console.log(await response.json());
 			const errorData = await response.json().catch(() => ({}));
 			throw new Error(errorData.detail || "Nie udało się zapisać projektu.");
 		}
@@ -93,6 +123,7 @@ function Creator() {
 				category_id: selectedType == "bracelet" ? 2 : 1,
 				metal: materials[selectedMaterial - 1].name,
 				project_size: Number(selectedLength.split(" ")[0]),
+				image_path: getImagePath(), // Możesz też wysłać tylko nazwę pliku i odtwarzać obraz po stronie backendu
 				trinket1: selectedCharm1,
 				trinket2: selectedCharm2,
 			};
@@ -106,7 +137,7 @@ function Creator() {
 			setProjectName("Mój Projekt Biżuterii");
 			setSelectedMaterial(1);
 			setSelectedType("bracelet");
-			setSelectedLength("18 cm");
+			setSelectedLength("16 cm");
 			setSelectedCharm1("heart");
 			setSelectedCharm2("none");
 		} catch (err) {
@@ -123,7 +154,7 @@ function Creator() {
 			<main className="creator-page">
 				<div className="creator-wrapper">
 					<div className="creator-layout">
-						<JewelryPreview />
+						<JewelryPreview image={previewImage} />
 						<div className="creator-panel">
 							<CreatorTitle />
 							<div
@@ -151,6 +182,7 @@ function Creator() {
 							<JewelryTypeSelector
 								selectedType={selectedType}
 								setSelectedType={setSelectedType}
+								setSelectedLength={setSelectedLength}
 							/>
 
 							<MaterialSelector
@@ -173,6 +205,7 @@ function Creator() {
 								setSelectedCharm1={setSelectedCharm1}
 								selectedCharm2={selectedCharm2}
 								setSelectedCharm2={setSelectedCharm2}
+								isNecklace={selectedType === "necklace"}
 							/>
 
 							<PriceSummary
