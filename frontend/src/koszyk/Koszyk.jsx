@@ -252,13 +252,6 @@ function App() {
 		);
 	};
 
-	const suggestedProducts = [
-		{ id: 1, price: "5000", title: "NASZYJNIK KONICZYNA 40 PLATYNA" },
-		{ id: 2, price: "6600", title: "BRANSOLETKA KRZYŻ 20 CM ŻÓŁTE ZŁOTO" },
-		{ id: 3, price: "2700", title: "NASZYJNIK GWIAZDKA 30 CM SREBRO" },
-		{ id: 4, price: "8000", title: "NASZYJNIK SERCE 45 CM RÓŻOWE ZŁOTO" },
-	];
-
 	const sumaProduktow = produktyWKoszyku.reduce(
 		(acc, curr) => acc + Number(curr.cena) * curr.ilosc,
 		0
@@ -340,14 +333,6 @@ function App() {
 						</div>
 
 						<Dostawa outRef={handleKosztDostawy} />
-
-						<h2 className="upsell-heading">Dorzuć do przesyłki!</h2>
-						<div className="upsell-grid">
-							{/* GENEROWANIE LISTY: Mapujemy tablicę na komponenty */}
-							{suggestedProducts.map((item) => (
-								<ElementListy key={item.id} product={item} onAdd={addToCart} />
-							))}
-						</div>
 					</div>
 
 					{/* PRAWA STRONA: PODSUMOWANIE */}

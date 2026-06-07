@@ -19,9 +19,11 @@ function ProductCard({ product, isOpen, onToggle }) {
 				"Access-Control-Allow-Methods": "",
 				"Access-Control-Allow-Headers": "*",
 			},
-			body: JSON.stringify({ product_id: product.id, quantity: 1 }),
+			body: JSON.stringify({ product_id: product.product_id, quantity: 1 }),
 		});
 		if (request.ok) alert("Przedmiot dodany do koszyka");
+		const body = await request.json();
+		console.log(body);
 	}
 
 	async function addFavorite() {
@@ -34,19 +36,17 @@ function ProductCard({ product, isOpen, onToggle }) {
 				"Access-Control-Allow-Methods": "",
 				"Access-Control-Allow-Headers": "*",
 			},
-			body: JSON.stringify({ product_id: product.id }),
+			body: JSON.stringify({ product_id: product.product_id }),
 		});
 		setIsFavorite((current) => !current);
 		if (request.ok) alert("Przedmiot dodany do ulubionych");
+		const body = await request.json();
+		console.log(body);
 	}
 
 	return (
 		<article className={`product-card ${isOpen ? "product-card-open" : ""}`} onClick={onToggle}>
-			<img
-				src={"src/assets/" + product.image_path}
-				alt={product.name}
-				className="product-image"
-			/>
+			<img src={product.image_path} alt={product.name} className="product-image" />
 
 			<div className="product-info">
 				<h2 className="product-name">{product.name}</h2>

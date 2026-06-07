@@ -41,19 +41,19 @@ INSERT INTO Categories (name) VALUES
 INSERT INTO Products
 (category_id, name, price, image_path)
 VALUES
-(1, 'Bransoletka Złota Serce', 5600.00, 'produkty/Bransoletka1.png'),
-(1, 'Bransoletka Srebrna Gwiazda', 4400.00, 'produkty/Bransoletka2.png'),
-(1, 'Bransoletka Różowe Złoto', 5800.00, 'produkty/Bransoletka3.png'),
-(1, 'Bransoletka Platynowa Księżyc', 7200.00, 'produkty/Bransoletka5.png'),
-(2, 'Naszyjnik Złote Serce', 5600.00, 'produkty/Naszyjnik1.png'),
-(3, 'Pierścionek Złoty Classic', 6200.00, 'produkty/Pierscionek1.png'),
-(3, 'Pierścionek Białe Złoto', 6600.00, 'produkty/Pierscionek2.png'),
-(3, 'Pierścionek Różowe Złoto', 6400.00, 'produkty/Pierscionek3.png'),
-(3, 'Pierścionek Platynowy', 8200.00, 'produkty/Pierscionek4.png'),
-(3, 'Pierścionek Srebrny', 3600.00, 'produkty/Pierscionek5.png'),
-(4, 'Kolczyki Złote Classic', 4200.00, 'produkty/ZloteKolczyki.png'),
-(4, 'Kolczyki Złote Elegance', 4600.00, 'produkty/ZloteKolczyki2.png'),
-(4, 'Kolczyki Złote Premium', 5200.00, 'produkty/ZloteKolczyki3.png');
+(1, 'Bransoletka Złota Serce', 5600.00, 'src/assets/produkty/Bransoletka1.png'),
+(1, 'Bransoletka Srebrna Gwiazda', 4400.00, 'src/assets/produkty/Bransoletka2.png'),
+(1, 'Bransoletka Różowe Złoto', 5800.00, 'src/assets/produkty/Bransoletka3.png'),
+(1, 'Bransoletka Platynowa Księżyc', 7200.00, 'src/assets/produkty/Bransoletka5.png'),
+(2, 'Naszyjnik Złote Serce', 5600.00, 'src/assets/produkty/Naszyjnik1.png'),
+(3, 'Pierścionek Złoty Classic', 6200.00, 'src/assets/produkty/Pierscionek1.png'),
+(3, 'Pierścionek Białe Złoto', 6600.00, 'src/assets/produkty/Pierscionek2.png'),
+(3, 'Pierścionek Różowe Złoto', 6400.00, 'src/assets/produkty/Pierscionek3.png'),
+(3, 'Pierścionek Platynowy', 8200.00, 'src/assets/produkty/Pierscionek4.png'),
+(3, 'Pierścionek Srebrny', 3600.00, 'src/assets/produkty/Pierscionek5.png'),
+(4, 'Kolczyki Złote Classic', 4200.00, 'src/assets/produkty/ZloteKolczyki.png'),
+(4, 'Kolczyki Złote Elegance', 4600.00, 'src/assets/produkty/ZloteKolczyki2.png'),
+(4, 'Kolczyki Złote Premium', 5200.00, 'src/assets/produkty/ZloteKolczyki3.png');
 -- Custom_Projects
 -- 30 przykładowych projektów zgodnych z zasadami kreatora
 --- Naszyjnik ma zawsze jedną zawieszkę.
@@ -144,32 +144,32 @@ VALUES
 (10, 30, 'Naszyjnik Srebrna Koniczyna', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 50 cm i wykorzystuje zawieszkę „koniczyna”. Całość została wyceniona na 4200.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', '2026-06-07 21:00:25.000000');
 
 -- Orders
-INSERT INTO Orders (order_id, user_id, status, price) VALUES
-(1, 1, 'Oczekujące', 11200.00),
-(2, 2, 'W realizacji', 10200.00),
-(3, 3, 'Zrealizowane', 17600.00),
-(4, 4, 'Zrealizowane', 14200.00),
-(5, 5, 'Anulowane', 13200.00),
-(6, 6, 'Oczekujące', 19000.00),
-(7, 7, 'W realizacji', 13400.00),
-(8, 8, 'Zrealizowane', 12800.00),
-(9, 9, 'Zrealizowane', 24400.00),
-(10, 10, 'Anulowane', 13800.00),
-(11, 11, 'Oczekujące', 10400.00),
-(12, 12, 'W realizacji', 16200.00),
-(13, 13, 'Zrealizowane', 11800.00),
-(14, 14, 'Zrealizowane', 13200.00),
-(15, 15, 'Anulowane', 19800.00),
-(16, 16, 'Oczekujące', 11400.00),
-(17, 17, 'W realizacji', 13500.00),
-(18, 18, 'Zrealizowane', 17600.00),
-(19, 19, 'Zrealizowane', 13200.00),
-(20, 20, 'Anulowane', 15700.00),
-(21, 1, 'Oczekujące', 19000.00),
-(22, 2, 'W realizacji', 14200.00),
-(23, 3, 'Zrealizowane', 9700.00),
-(24, 4, 'Zrealizowane', 16000.00),
-(25, 5, 'Anulowane', 13800.00);
+INSERT INTO Orders (user_id, status, price) VALUES
+(1, 'Oczekujące', 11200.00),
+(2, 'W realizacji', 10200.00),
+(3, 'Zrealizowane', 17600.00),
+(4, 'Zrealizowane', 14200.00),
+(5, 'Anulowane', 13200.00),
+(6, 'Oczekujące', 19000.00),
+(7, 'W realizacji', 13400.00),
+(8, 'Zrealizowane', 12800.00),
+(9, 'Zrealizowane', 24400.00),
+(10, 'Anulowane', 13800.00),
+(11, 'Oczekujące', 10400.00),
+(12, 'W realizacji', 16200.00),
+(13, 'Zrealizowane', 11800.00),
+(14, 'Zrealizowane', 13200.00),
+(15, 'Anulowane', 19800.00),
+(16, 'Oczekujące', 11400.00),
+(17, 'W realizacji', 13500.00),
+(18, 'Zrealizowane', 17600.00),
+(19, 'Zrealizowane', 13200.00),
+(20, 'Anulowane', 15700.00),
+(21, 'Oczekujące', 19000.00),
+(22, 'W realizacji', 14200.00),
+(3, 'Zrealizowane', 9700.00),
+(4, 'Zrealizowane', 16000.00),
+(5, 'Anulowane', 13800.00);
 
 
 -- Cart

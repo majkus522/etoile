@@ -98,7 +98,7 @@ function Favorites() {
 						product_id: item.product_id,
 						project_id: item.project_id,
 						checked: true,
-						image: details.image_path || null,
+						image: details.image_path,
 						seller: details.username,
 						title: details.name,
 						price: details.price,
