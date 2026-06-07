@@ -6,7 +6,11 @@ function BlogPostCard({ post }) {
 	return (
 		<article className="blog-post-card">
 			<div className="blog-post-content">
-				<img src={defaultImage} alt={post.title} className="blog-post-image" />
+				<img
+					src={post.image_path || defaultImage}
+					alt={post.title || post.name}
+					className="blog-post-image"
+				/>
 
 				<div className="blog-post-right">
 					<h2 className="blog-post-title">{post.title}</h2>

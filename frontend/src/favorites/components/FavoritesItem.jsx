@@ -11,7 +11,7 @@ const FavoritesItem = ({ product, onToggleCheck, onAddToCart }) => {
 			<a
 				href={product.project_id == null ? "/" : `../blog/${product.project_id}`}
 				className="fav-preview-box">
-				<img src={iconSample} alt="produkt" />
+				<img src={product.image || iconSample} alt="produkt" />
 			</a>
 			<div className="fav-product-info">
 				<p className="fav-product-name">{product.title}</p>

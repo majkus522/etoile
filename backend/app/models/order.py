@@ -8,3 +8,4 @@ class Order(Base):
     user_id = Column(Integer, ForeignKey("users.user_id"))
     status = Column(String)
     created_at = Column(DateTime)
+    price = Column(Float)

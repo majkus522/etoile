@@ -10,6 +10,3 @@ class ProjectCreate(BaseModel):
     project_size: int
     trinket1: str
     trinket2: str
-
-class ProjectName(BaseModel):
-    name: str

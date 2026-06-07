@@ -43,7 +43,8 @@ def create_order(
         new_order = Order(
             user_id=user_id,
             status="Oczekujące",
-            created_at=datetime.utcnow()
+            created_at=datetime.utcnow(),
+            price=0
         )
         db.add(new_order)
         #pobranie ID ordera
@@ -71,6 +72,8 @@ def create_order(
                     price_at_purchase=db.query(Product).filter(Product.product_id == item.product_id).first().price
                 )
                 db.add(order_item)
+            # aktualizacja ceny zamówienia
+            new_order.price += order_item.price_at_purchase * order_item.quantity
 
         # =========================
         # usuwanie koszyka

@@ -13,6 +13,7 @@ export default function BlogPostPage() {
 	const [favoriteId, setFavoriteId] = useState(null);
 	const [projectId, setProjectId] = useState(null);
 	const [favCount, setFavCount] = useState(0);
+	const [projectImage, setProjectImage] = useState(null);
 
 	useEffect(() => {
 		setPost(null);
@@ -49,7 +50,9 @@ export default function BlogPostPage() {
 				}
 
 				const data = await response.json();
+
 				setPost(data);
+				setProjectImage(data.image_path);
 				setProjectId(data.project_id);
 				setFavCount(data.fav);
 			} catch (err) {
@@ -190,7 +193,11 @@ export default function BlogPostPage() {
 				)}
 			</div>
 
-			<img src={defaultPostImage} alt={post.title} className="single-post-image" />
+			<img
+				src={projectImage || defaultPostImage}
+				alt={post.title}
+				className="single-post-image"
+			/>
 
 			<p className="single-post-content">{post.description || "Brak treści posta."}</p>
 		</article>

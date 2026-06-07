@@ -1,7 +1,7 @@
 import "./ProjectItem.css";
 import iconSample from "../../assets/Sample.png";
 
-export default function ProjectItem({ item, selectedProjectId, onSelectProject }) {
+export default function ProjectItem({ item, selectedProject, onSelectProject }) {
 	async function handleDelete() {
 		await fetch("http://localhost:8000/projects/" + item.project_id, {
 			method: "DELETE",
@@ -34,20 +34,20 @@ export default function ProjectItem({ item, selectedProjectId, onSelectProject }
 	}
 
 	return (
-		<div className={selectedProjectId === item.project_id ? "item item-selected" : "item"}>
+		<div className={selectedProject === item.project_id ? "item item-selected" : "item"}>
 			<label className="project-radio">
 				<input
 					type="radio"
 					name="selectedProject"
 					value={item.project_id}
-					checked={selectedProjectId === item.project_id}
+					checked={selectedProject === item.project_id}
 					onChange={() => onSelectProject(item)}
 				/>
 
 				<span>Wybierz</span>
 			</label>
 
-			<img src={iconSample} alt={item.name} />
+			<img src={item.image_path || iconSample} alt={item.name} />
 
 			<p className="title">{item.name}</p>
 

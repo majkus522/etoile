@@ -138,7 +138,7 @@ function Creator() {
 			setSelectedMaterial(1);
 			setSelectedType("bracelet");
 			setSelectedLength("16 cm");
-			setSelectedCharm1("heart");
+			setSelectedCharm1("serce");
 			setSelectedCharm2("none");
 		} catch (err) {
 			alert(`Błąd: ${err.message}`);

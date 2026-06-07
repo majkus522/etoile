@@ -64,29 +64,31 @@ function Favorites() {
 					let details = {};
 
 					if (item.product_id === null) {
-						const res = await fetch("http://localhost:8000/projects/", {
-							headers: {
-								item: item.project_id,
-								Token: localStorage.getItem("token"),
-								"Content-Type": "application/json",
-								"Access-Control-Allow-Origin": "",
-								"Access-Control-Allow-Methods": "",
-								"Access-Control-Allow-Headers": "*",
-							},
-						});
+						const res = await fetch(
+							`http://localhost:8000/projects/${item.project_id}`,
+							{
+								headers: {
+									"Content-Type": "application/json",
+									"Access-Control-Allow-Origin": "",
+									"Access-Control-Allow-Methods": "",
+									"Access-Control-Allow-Headers": "*",
+								},
+							}
+						);
 
 						details = await res.json();
 					} else {
-						const res = await fetch("http://localhost:8000/products/", {
-							headers: {
-								item: item.product_id,
-								Token: localStorage.getItem("token"),
-								"Content-Type": "application/json",
-								"Access-Control-Allow-Origin": "",
-								"Access-Control-Allow-Methods": "",
-								"Access-Control-Allow-Headers": "*",
-							},
-						});
+						const res = await fetch(
+							`http://localhost:8000/products/${item.product_id}`,
+							{
+								headers: {
+									"Content-Type": "application/json",
+									"Access-Control-Allow-Origin": "",
+									"Access-Control-Allow-Methods": "",
+									"Access-Control-Allow-Headers": "*",
+								},
+							}
+						);
 
 						details = await res.json();
 					}
@@ -96,9 +98,10 @@ function Favorites() {
 						product_id: item.product_id,
 						project_id: item.project_id,
 						checked: true,
-						seller: details.seller || "Etoile_Jewelry",
-						title: details.title || "Brak nazwy",
-						price: item.price || 0,
+						image: details.image_path || null,
+						seller: details.username,
+						title: details.name,
+						price: details.price,
 					};
 				})
 			);

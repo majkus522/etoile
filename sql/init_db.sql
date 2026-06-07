@@ -45,7 +45,8 @@ CREATE TABLE Orders (
     order_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES Users(user_id),
     status VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    price DECIMAL(10, 2) NOT NULL
 );
 
 -- Tabele z zależnościami 2-go stopnia

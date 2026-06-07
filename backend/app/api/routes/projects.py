@@ -1,10 +1,13 @@
+import token
 from typing import Annotated
 from fastapi import APIRouter, Depends, Header, HTTPException
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import null
 from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.models.project import CustomProject
-from app.schemas.project import ProjectCreate, ProjectName
+from app.models.user import User
+from app.schemas.project import ProjectCreate
 from app.core.security import get_current_user
 from datetime import datetime
 
@@ -52,7 +55,17 @@ def delete_project(project_id: int, token: Annotated[str | None, Header()] = Non
 
     return {"msg": "deleted"}
 
-@router.get("/")
-def get_project_by_name(project_name: ProjectName, token: Annotated[str | None, Header()] = None, db: Session = Depends(get_db)):
-    user_id = get_current_user(token, db)
-    return db.query(CustomProject).filter(CustomProject.name == project_name.name, CustomProject.user_id == user_id).first()
+@router.get("/{project_id}")
+def get_project_author(project_id: int, db: Session = Depends(get_db)):
+    project = db.query(CustomProject).filter(
+        CustomProject.project_id == project_id
+    ).first()
+
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    user = db.query(User).filter(User.user_id == project.user_id).first()
+    name = project.name if project.name else "Brak nazwy"
+    image_path = project.image_path
+    price = project.total_price if project.total_price else 0
+    return {"username": user.username, "name": name, "image_path": image_path, "price": price}

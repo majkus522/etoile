@@ -26,14 +26,19 @@ export default function ProjectItem({ item }) {
 				"Access-Control-Allow-Methods": "",
 				"Access-Control-Allow-Headers": "*",
 			},
-			body: JSON.stringify({ project_id: item.project_id, quantity: 1, product_id: null }),
+			body: JSON.stringify({
+				project_id: item.project_id,
+				image: item.image_path || iconSample,
+				quantity: 1,
+				product_id: null,
+			}),
 		});
 		if (request.ok) alert("Przedmiot dodany do koszyka");
 	}
 
 	return (
 		<div className="item">
-			<img src={iconSample} />
+			<img src={item.image_path || iconSample} />
 			<p className="title">{item.name}</p>
 			<p className="price">{item.total_price} zł</p>
 			<button className="delete" onClick={handleDelete}>

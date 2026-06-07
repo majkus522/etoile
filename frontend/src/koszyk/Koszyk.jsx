@@ -33,22 +33,27 @@ const ElementKoszyka = ({ produkt, naPlus, naMinus, onToggleCheck }) => (
 			<input type="checkbox" checked={produkt.checked} onChange={onToggleCheck} />
 			<span className="star-icon"></span>
 		</label>
+
 		<a href="/" className="cart-koszyk">
-			<img src={iconSample} alt="koszyk" />
+			<img src={produkt.image || iconSample} alt={produkt.nazwa} />
 		</a>
+
 		<div className="product-info">
 			<p className="product-name">{produkt.nazwa}</p>
+
 			<div className="product-row">
-				{/* LICZNIK - Twoja struktura 1:1 */}
 				<div className="qty-picker">
 					<button onClick={naMinus} type="button">
 						-
 					</button>
+
 					<input type="text" value={produkt.ilosc} readOnly />
+
 					<button onClick={naPlus} type="button">
 						+
 					</button>
 				</div>
+
 				<span className="price-big">{produkt.cena * produkt.ilosc} zł</span>
 			</div>
 		</div>
@@ -59,7 +64,7 @@ const ElementKoszyka = ({ produkt, naPlus, naMinus, onToggleCheck }) => (
 const ElementListy = ({ product, onAdd }) => (
 	<div className="upsell-box shadow">
 		<a href="/" className="upsell-img">
-			<img src={iconSample} alt="produkt" />
+			<img src={product.image} alt="produkt" />
 		</a>
 		<p className="price-mid">{product.price} zł</p>
 		<p className="upsell-text">{product.title}</p>
@@ -109,19 +114,35 @@ function App() {
 
 			const data = await res.json();
 
-			setProduktyWKoszyku(
-				data
-					.map((item) => ({
+			const enriched = await Promise.all(
+				data.map(async (item) => {
+					let details = {};
+
+					if (item.product_id) {
+						const res = await fetch(
+							`http://localhost:8000/products/${item.product_id}`
+						);
+						details = await res.json();
+					} else if (item.project_id) {
+						const res = await fetch(
+							`http://localhost:8000/projects/${item.project_id}`
+						);
+						details = await res.json();
+					}
+
+					return {
 						id: item.cart_item_id,
 						product_id: item.product_id,
+						project_id: item.project_id,
 						ilosc: item.quantity,
 						cena: item.price,
-						nazwa: item.name,
-						zdjecie: item.image,
+						nazwa: details.name,
+						image: details.image_path || iconSample, // 🔥 TU JEST KLUCZ
 						checked: false,
-					}))
-					.sort((a, b) => a.id - b.id)
+					};
+				})
 			);
+			setProduktyWKoszyku(enriched.sort((a, b) => a.id - b.id));
 		} catch (err) {
 			setError("Błąd pobierania koszyka");
 		} finally {
@@ -263,6 +284,7 @@ function App() {
 			console.error("❌ ERROR:", err);
 			alert("Nie udało się dodać zaznaczonych do koszyka.");
 		}
+		loadCart();
 	};
 
 	useTitle("Etoile - Koszyk");

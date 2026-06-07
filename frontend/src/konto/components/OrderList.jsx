@@ -45,25 +45,51 @@ function OrderList() {
 			}
 
 			const data = await response.json();
-			let orders = [];
+			const ordersWithItems = [];
+
 			for (const order of data) {
-				console.log("http://localhost:8000/orderitems/" + order.order_id);
 				const res = await fetch("http://localhost:8000/orderitems/" + order.order_id, {
 					headers: {
 						token: localStorage.getItem("token"),
 						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "",
-						"Access-Control-Allow-Methods": "",
-						"Access-Control-Allow-Headers": "*",
 					},
 				});
+
 				const d = await res.json();
-				for (const e of d) {
-					e.status = order.status;
-				}
-				orders = orders.concat(d);
+
+				const enriched = await Promise.all(
+					d.map(async (item) => {
+						let details = {};
+
+						if (item.product_id) {
+							const productRes = await fetch(
+								`http://localhost:8000/products/${item.product_id}`
+							);
+							details = await productRes.json();
+						} else if (item.project_id) {
+							const projectRes = await fetch(
+								`http://localhost:8000/projects/${item.project_id}`
+							);
+							details = await projectRes.json();
+						}
+
+						return {
+							...item,
+							name: details.name,
+							image: details.image_path,
+						};
+					})
+				);
+
+				ordersWithItems.push({
+					order_id: order.order_id,
+					status: order.status,
+					price: order.price,
+					items: enriched,
+				});
 			}
-			setProducts(orders);
+
+			setProducts(ordersWithItems);
 		} catch (err) {
 			setError(err.message);
 		} finally {
@@ -123,12 +149,21 @@ function OrderList() {
 
 							{!loading &&
 								!error &&
-								products.map((item) => (
-									<OrderListItem
-										key={item.id}
-										product={item}
-										onToggleCheck={() => handleToggleCheck(item.id)}
-									/>
+								products.map((order) => (
+									<div key={order.order_id} className="order-box">
+										<div className="order-header">
+											<h3>Zamówienie #{order.order_id}</h3>
+											<p>Status: {order.status}</p>
+											<p>Suma: {order.price.toFixed(2)} zł</p>
+										</div>
+
+										{order.items.map((item) => (
+											<OrderListItem
+												key={item.order_item_id}
+												product={item}
+											/>
+										))}
+									</div>
 								))}
 						</div>
 					</div>

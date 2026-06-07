@@ -2,7 +2,7 @@ import "./ProjectList.css";
 import { useEffect, useState } from "react";
 import ProjectItem from "./ProjectItem.jsx";
 
-export default function ProjectList({ selectedProjectId, onSelectProject }) {
+export default function ProjectList({ selectedProject, onSelectProject }) {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
@@ -28,7 +28,7 @@ export default function ProjectList({ selectedProjectId, onSelectProject }) {
 				<ProjectItem
 					key={item.project_id}
 					item={item}
-					selectedProjectId={selectedProjectId}
+					selectedProject={selectedProject}
 					onSelectProject={onSelectProject}
 				/>
 			))}

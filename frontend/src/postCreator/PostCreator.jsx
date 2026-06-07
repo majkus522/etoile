@@ -24,8 +24,7 @@ function PostCreator() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
-
-	const [selectedProjectId, setSelectedProjectId] = useState(null);
+	const [selectedProject, setSelectedProject] = useState(null);
 
 	const fileInputRef = useRef(null);
 	const navigate = useNavigate();
@@ -46,17 +45,17 @@ function PostCreator() {
 			return;
 		}
 
-		if (selectedProjectId == null) {
+		if (!selectedProject) {
 			setError("Musisz wybrać projekt przed utworzeniem posta.");
 			return;
 		}
 
 		const newPost = {
 			user_id: 1,
-			project_id: selectedProjectId,
-			title: title,
-			description: description,
-			image_path: image ? image.name : null,
+			project_id: selectedProject.project_id,
+			title,
+			description,
+			image_path: selectedProject.image_path, // 🔥 TO JEST KLUCZ
 		};
 
 		try {
@@ -84,7 +83,7 @@ function PostCreator() {
 			setTitle("");
 			setDescription("");
 			setImage(null);
-			setSelectedProjectId(null);
+			setSelectedProject(null);
 
 			if (fileInputRef.current) {
 				fileInputRef.current.value = "";
@@ -116,8 +115,8 @@ function PostCreator() {
 					<h2>Wybierz projekt do posta</h2>
 
 					<ProjectList
-						selectedProjectId={selectedProjectId}
-						onSelectProject={(project) => setSelectedProjectId(project.project_id)}
+						selectedProject={selectedProject?.project_id}
+						onSelectProject={(project) => setSelectedProject(project)}
 					/>
 
 					{error && <p className="post-creator-error">{error}</p>}

@@ -31,10 +31,10 @@ VALUES
 (3, 'Projekt Pierścionka Piotr', 599.99, 3, 'Platyna', 15, 'Diament', NULL);
 
 -- Orders
-INSERT INTO Orders (user_id, status) VALUES
-(1, 'Zrealizowane'),
-(2, 'W realizacji'),
-(3, 'Oczekujące');
+INSERT INTO Orders (user_id, status, price) VALUES
+(1, 'Zrealizowane', 179.99),
+(2, 'W realizacji', 249.99),
+(3, 'Oczekujące', 599.99);
 
 -- Cart
 INSERT INTO Cart (user_id, product_id, project_id, quantity) VALUES

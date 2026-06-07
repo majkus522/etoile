@@ -7,6 +7,7 @@ export default function BlogPostList() {
 	const [error, setError] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
+	const [images, setImages] = useState([]);
 
 	const postsPerPage = 5;
 
@@ -38,6 +39,7 @@ export default function BlogPostList() {
 				const data = await response.json();
 
 				if (Array.isArray(data)) {
+					setImages(data);
 					setPosts(data);
 					setTotalPages(Math.ceil(data.length / postsPerPage));
 				} else {
