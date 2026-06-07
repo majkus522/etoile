@@ -48,7 +48,6 @@
 
 .single-post-image {
 	width: 100%;
-	max-height: 500px;
 	object-fit: cover;
 	border: 1px solid #d8d3ca;
 	margin-bottom: 28px;

@@ -1,9 +1,34 @@
+-- ============================================================
+-- Przykładowe dane testowe dla projektu Etoile
+-- Hasło testowe dla wszystkich użytkowników: Test123!
+-- Hash hasła wygenerowany w Pythonie przez systemowe htpasswd -B
+-- i jest zgodny z bcrypt/passlib.
+--
+-- Materiały projektów zgodne z listą frontendu:
+-- Złoto żółte, Srebro, Złoto różowe, Platyna, Srebro
+-- ============================================================
 -- Users
 INSERT INTO Users (username, email, password_hash, is_designer) VALUES
-('jan_kowalski', 'jan@example.com', 'hash123', FALSE),
-('anna_nowak', 'anna@example.com', 'hash456', TRUE),
-('piotr_wisniewski', 'piotr@example.com', 'hash789', FALSE),
-('kasia_zielinska', 'kasia@example.com', 'hash101', TRUE);
+('jan_kowalski', 'jan@example.com', '$2y$05$DHqdyW1bhuWKfE6R1ZEsQeRlyEICfVS2RfgwCjUF415EAHbzaKytW', FALSE),
+('anna_nowak', 'anna@example.com', '$2y$05$DN00k64qjVXUa1Z7.5qUW.xUfQ0Nbx3A/hW.XoQLST99ga5024DYq', TRUE),
+('piotr_wisniewski', 'piotr@example.com', '$2y$05$JvSWF5aikKYOkaS1KUXZOO8xe/0AgzHkaBbWt4SEfA6JD6iPQOwQm', FALSE),
+('kasia_zielinska', 'kasia@example.com', '$2y$05$dwnOpPwk8e9v1HR0FYGTieH5KgKKcXZHvmUQSX7I0wRUVIuHH0e1y', TRUE),
+('marek_lis', 'marek@example.com', '$2y$05$wfi8RnT3rvgzuKQwo9SGJ.4QUrad8PKYBTx3wH6Nxty/nsKp.LdC6', FALSE),
+('ewa_maj', 'ewa@example.com', '$2y$05$ne/46cSDdRfuHVVVWrkZveUjyG/6DEucjLbaHjeAKrzuUuXMHuXvG', TRUE),
+('lukasz_krawczyk', 'lukasz@example.com', '$2y$05$z61tEk5rOFd7mfXtLK5jM.cTk/Oi28rN7bIUCtkrTIS6uPQeep1Ou', FALSE),
+('magda_pawlak', 'magda@example.com', '$2y$05$uoZHA4eLNoSQUjrN0PcqmOR.oZyqjnlJHab2AiYzMHD.7cPUTjkji', TRUE),
+('karol_wrobel', 'karol@example.com', '$2y$05$sbk9coZtktiaYVgqkUU3A.9GCcALwGrTRmIqSiIZPsfKlnh7zBGgi', FALSE),
+('ola_dabrowska', 'ola@example.com', '$2y$05$jezGTZldOq2EwFQ0gbDXMeUK8iS6ESwWyEcHQ366Cpf7A9.p5yT4G', FALSE),
+('tomasz_kaczmarek', 'tomasz@example.com', '$2y$05$jLh.gvkuehdmIuBOA6uecOXMVTAEOKJEUSTFlzsKOhaBMSoc7h/nK', TRUE),
+('alicja_sikora', 'alicja@example.com', '$2y$05$RqrFmqUXA4bETvZCGBotGuaY6kzc4etGGQ0gT21THlDMU.ZnOaOGu', FALSE),
+('jakub_baran', 'jakub@example.com', '$2y$05$dcKxVij7egrtRFmVNVbyYuqNa3sOA44XpkJ0sxMY969xhhuHkxCOq', FALSE),
+('zofia_krol', 'zofia@example.com', '$2y$05$unWHL8GTZm5BQtsENHh.AeEI4PgV0HIKIeasd0MW1W8vir98kf4XW', TRUE),
+('bartek_gora', 'bartek@example.com', '$2y$05$NGvqCKYJd8dqwPOIklZr3Oyh/XWZhP3nJ.in89clnRutEeF.5U0AO', FALSE),
+('natalia_witkowska', 'natalia@example.com', '$2y$05$.cmGZQ8MGLXtUhPCLUFJAOQqN.iWTfCs0OGcrtsIC4W09bOwdJaXe', TRUE),
+('pawel_michalski', 'pawel@example.com', '$2y$05$UXM2GK3ufiUW7uG.3LBsy.A6IDlfgGnzKd7wjoUpHHsKPneHedN0y', FALSE),
+('monika_czarnecka', 'monika@example.com', '$2y$05$9m6GhRXGsHSy8l.qWMmoqudM/I/2NKlLUj9adxZm6zq/gGRM5xH16', TRUE),
+('adam_wozniak', 'adam@example.com', '$2y$05$1aCBioxi3EVng9wJaqCasujNXnV3B/zlkKAjrtoNdxZ3Pj62Mqqu6', FALSE),
+('kinga_mazur', 'kinga@example.com', '$2y$05$9SMeIoNfzYnlRC7qN32O0uiqXCDAGOjJGQBY/izbyEooHsAC1e1UK', TRUE);
 
 -- Categories
 INSERT INTO Categories (name) VALUES
@@ -13,66 +38,280 @@ INSERT INTO Categories (name) VALUES
 ('Kolczyki');
 
 -- Products
-INSERT INTO Products (category_id, name, price, image_path) VALUES
-(1, 'Bransoletka Srebrna Classic', 149.99, 'produkty/Bransoletka1.png'),
-(1, 'Bransoletka Gold Luxury', 299.99, 'produkty/Bransoletka2.png'),
-(2, 'Naszyjnik Elegance', 199.99, 'produkty/Naszyjnik1.png'),
-(3, 'Pierścionek Diamond', 499.99, 'produkty/Pierscionek2.png'),
-(4, 'Kolczyki Pearl', 129.99, 'produkty/ZloteKolczyki3.png');
-
--- Custom_Projects
-INSERT INTO Custom_Projects
-(user_id, name, total_price, category_id, metal, project_size, trinket1, trinket2)
+INSERT INTO Products
+(category_id, name, price, image_path)
 VALUES
-(1, 'Projekt Bransoletki Jan', 179.99, 1, 'Srebro', 19, 'Serce', 'Gwiazda'),
-(2, 'Projekt Naszyjnika Anna', 249.99, 2, 'Złoto', 50, 'Motyl', NULL),
-(3, 'Projekt Pierścionka Piotr', 599.99, 3, 'Platyna', 15, 'Diament', NULL);
+(1, 'Bransoletka Złota Serce', 5600.00, 'produkty/Bransoletka1.png'),
+(1, 'Bransoletka Srebrna Gwiazda', 4400.00, 'produkty/Bransoletka2.png'),
+(1, 'Bransoletka Różowe Złoto', 5800.00, 'produkty/Bransoletka3.png'),
+(1, 'Bransoletka Platynowa Księżyc', 7200.00, 'produkty/Bransoletka5.png'),
+(2, 'Naszyjnik Złote Serce', 5600.00, 'produkty/Naszyjnik1.png'),
+(3, 'Pierścionek Złoty Classic', 6200.00, 'produkty/Pierscionek1.png'),
+(3, 'Pierścionek Białe Złoto', 6600.00, 'produkty/Pierscionek2.png'),
+(3, 'Pierścionek Różowe Złoto', 6400.00, 'produkty/Pierscionek3.png'),
+(3, 'Pierścionek Platynowy', 8200.00, 'produkty/Pierscionek4.png'),
+(3, 'Pierścionek Srebrny', 3600.00, 'produkty/Pierscionek5.png'),
+(4, 'Kolczyki Złote Classic', 4200.00, 'produkty/ZloteKolczyki.png'),
+(4, 'Kolczyki Złote Elegance', 4600.00, 'produkty/ZloteKolczyki2.png'),
+(4, 'Kolczyki Złote Premium', 5200.00, 'produkty/ZloteKolczyki3.png');
+-- Custom_Projects
+-- 30 przykładowych projektów zgodnych z zasadami kreatora
+--- Naszyjnik ma zawsze jedną zawieszkę.
+-- Bransoletka może mieć jedną lub dwie zawieszki.
+-- Cena = cena metalu + dopłata za długość + cena zawieszek + baza typu produktu.
+-- Baza: bransoletka +800 zł, naszyjnik +1000 zł.
+-- 1 zawieszka = 800 zł, 2 zawieszki = 1600 zł.
+
+INSERT INTO Custom_Projects
+(user_id, name, image_path, total_price, created_at, category_id, metal, project_size, trinket1, trinket2)
+VALUES
+(5, 'Bransoletka Złote Serce', '/src/assets/creator/Bransoletka/Złoto żółte/1z/serce.png', 5600.00, '2026-06-07 20:00:00.000000', 2, 'Złoto żółte', 18, 'serce', 'none'),
+(5, 'Bransoletka Biała Gwiazda', '/src/assets/creator/Bransoletka/Srebro/1z/gwiazda.png', 5800.00, '2026-06-07 20:02:05.000000', 2, 'Srebro', 16, 'gwiazda', 'none'),
+(5, 'Bransoletka Różowy Księżyc', '/src/assets/creator/Bransoletka/Złoto różowe/1z/księżyc.png', 6000.00, '2026-06-07 20:04:10.000000', 2, 'Złoto różowe', 20, 'księżyc', 'none'),
+(5, 'Bransoletka Platynowa Koniczyna', '/src/assets/creator/Bransoletka/Srebro/1z/koniczyna.png', 7000.00, '2026-06-07 20:06:15.000000', 2, 'Srebro', 18, 'koniczyna', 'none'),
+(5, 'Bransoletka Srebrne Słońce', '/src/assets/creator/Bransoletka/Srebro/1z/słońce.png', 3400.00, '2026-06-07 20:08:20.000000', 2, 'Srebro', 16, 'słońce', 'none'),
+(6, 'Bransoletka Krzyż i Serce', '/src/assets/creator/Bransoletka/Złoto żółte/2z/krzyż-serce.png', 6600.00, '2026-06-07 20:10:25.000000', 2, 'Złoto żółte', 20, 'krzyż', 'serce'),
+(6, 'Bransoletka Gwiazda i Księżyc', '/src/assets/creator/Bransoletka/Srebro/2z/gwiazda-księżyc.png', 6800.00, '2026-06-07 20:12:30.000000', 2, 'Srebro', 18, 'gwiazda', 'księżyc'),
+(6, 'Bransoletka Słońce i Koniczyna', '/src/assets/creator/Bransoletka/Złoto różowe/2z/słońce-koniczyna.png', 6400.00, '2026-06-07 20:14:35.000000', 2, 'Złoto różowe', 16, 'słońce', 'koniczyna'),
+(6, 'Bransoletka Nieskończoność i Serce', '/src/assets/creator/Bransoletka/Srebro/2z/nieskończoność-serce.png', 8000.00, '2026-06-07 20:16:40.000000', 2, 'Srebro', 20, 'nieskończoność', 'serce'),
+(6, 'Bransoletka Krzyż i Gwiazda', '/src/assets/creator/Bransoletka/Srebro/2z/krzyż-gwiazda.png', 4400.00, '2026-06-07 20:18:45.000000', 2, 'Srebro', 18, 'krzyż', 'gwiazda'),
+(7, 'Bransoletka Dwa Serca', '/src/assets/creator/Bransoletka/Złoto żółte/2z/serce-serce.png', 6200.00, '2026-06-07 20:20:50.000000', 2, 'Złoto żółte', 16, 'serce', 'serce'),
+(7, 'Bransoletka Dwie Koniczyny', '/src/assets/creator/Bransoletka/Srebro/2z/koniczyna-koniczyna.png', 7000.00, '2026-06-07 20:22:55.000000', 2, 'Srebro', 20, 'koniczyna', 'koniczyna'),
+(7, 'Bransoletka Dwa Księżyce', '/src/assets/creator/Bransoletka/Złoto różowe/2z/księżyc-księżyc.png', 6600.00, '2026-06-07 20:25:00.000000', 2, 'Złoto różowe', 18, 'księżyc', 'księżyc'),
+(7, 'Bransoletka Dwa Słońca', '/src/assets/creator/Bransoletka/Srebro/2z/słońce-słońce.png', 7600.00, '2026-06-07 20:27:05.000000', 2, 'Srebro', 16, 'słońce', 'słońce'),
+(7, 'Bransoletka Dwie Gwiazdy', '/src/assets/creator/Bransoletka/Srebro/2z/gwiazda-gwiazda.png', 4600.00, '2026-06-07 20:29:10.000000', 2, 'Srebro', 20, 'gwiazda', 'gwiazda'),
+(8, 'Naszyjnik Złote Serce', '/src/assets/creator/Naszyjnik/Złoto żółte/1z/serce.png', 5600.00, '2026-06-07 20:31:15.000000', 1, 'Złoto żółte', 40, 'serce', 'none'),
+(8, 'Naszyjnik Biała Koniczyna', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', 6300.00, '2026-06-07 20:33:20.000000', 1, 'Srebro', 45, 'koniczyna', 'none'),
+(8, 'Naszyjnik Różowy Księżyc', '/src/assets/creator/Naszyjnik/Złoto różowe/1z/księżyc.png', 6400.00, '2026-06-07 20:35:25.000000', 1, 'Złoto różowe', 50, 'księżyc', 'none'),
+(8, 'Naszyjnik Platynowe Słońce', '/src/assets/creator/Naszyjnik/Srebro/1z/słońce.png', 7000.00, '2026-06-07 20:37:30.000000', 1, 'Srebro', 40, 'słońce', 'none'),
+(8, 'Naszyjnik Srebrny Krzyż', '/src/assets/creator/Naszyjnik/Srebro/1z/krzyż.png', 3900.00, '2026-06-07 20:39:35.000000', 1, 'Srebro', 45, 'krzyż', 'none'),
+(9, 'Naszyjnik Złota Nieskończoność', '/src/assets/creator/Naszyjnik/Złoto żółte/1z/nieskończoność.png', 6200.00, '2026-06-07 20:41:40.000000', 1, 'Złoto żółte', 50, 'nieskończoność', 'none'),
+(9, 'Naszyjnik Biała Gwiazda', '/src/assets/creator/Naszyjnik/Srebro/1z/gwiazda.png', 6000.00, '2026-06-07 20:43:45.000000', 1, 'Srebro', 40, 'gwiazda', 'none'),
+(9, 'Naszyjnik Różowe Serce', '/src/assets/creator/Naszyjnik/Złoto różowe/1z/serce.png', 6100.00, '2026-06-07 20:45:50.000000', 1, 'Złoto różowe', 45, 'serce', 'none'),
+(9, 'Naszyjnik Platynowa Koniczyna', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', 7600.00, '2026-06-07 20:47:55.000000', 1, 'Srebro', 50, 'koniczyna', 'none'),
+(9, 'Naszyjnik Srebrny Księżyc', '/src/assets/creator/Naszyjnik/Srebro/1z/księżyc.png', 3600.00, '2026-06-07 20:50:00.000000', 1, 'Srebro', 40, 'księżyc', 'none'),
+(10, 'Naszyjnik Złote Słońce', '/src/assets/creator/Naszyjnik/Złoto żółte/1z/słońce.png', 5900.00, '2026-06-07 20:52:05.000000', 1, 'Złoto żółte', 45, 'słońce', 'none'),
+(10, 'Naszyjnik Biały Krzyż', '/src/assets/creator/Naszyjnik/Srebro/1z/krzyż.png', 6600.00, '2026-06-07 20:54:10.000000', 1, 'Srebro', 50, 'krzyż', 'none'),
+(10, 'Naszyjnik Różowa Nieskończoność', '/src/assets/creator/Naszyjnik/Złoto różowe/1z/nieskończoność.png', 5800.00, '2026-06-07 20:56:15.000000', 1, 'Złoto różowe', 40, 'nieskończoność', 'none'),
+(10, 'Naszyjnik Platynowa Gwiazda', '/src/assets/creator/Naszyjnik/Srebro/1z/gwiazda.png', 7300.00, '2026-06-07 20:58:20.000000', 1, 'Srebro', 45, 'gwiazda', 'none'),
+(10, 'Naszyjnik Srebrna Koniczyna', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', 4200.00, '2026-06-07 21:00:25.000000', 1, 'Srebro', 50, 'koniczyna', 'none');
+
+-- Kontrola przykładowa:
+-- Bransoletka Złote Serce: 3800 + 200 + 800 + 800 = 5600
+-- Naszyjnik Biała Koniczyna: 4200 + 300 + 800 + 1000 = 6300
+
+
+-- Blog_Posts
+-- Poprawione posty blogowe
+-- image_path w Blog_Posts odpowiada image_path z Custom_Projects dla danego project_id.
+-- Założenie: projekty Custom_Projects zostały dodane w kolejności z podanego pliku i mają project_id 1-30.
+
+-- Jeżeli chcesz zastąpić poprzednie przykładowe posty, odkomentuj linię poniżej:
+-- DELETE FROM Blog_Posts;
+
+INSERT INTO Blog_Posts
+(user_id, project_id, title, description, image_path, created_at)
+VALUES
+(5, 1, 'Bransoletka Złote Serce', 'Autorski projekt typu bransoletka, wykonany w materiale Złoto żółte. Projekt ma rozmiar 18 cm i wykorzystuje zawieszkę „serce”. Całość została wyceniona na 5600.00 zł.', '/src/assets/creator/Bransoletka/Złoto żółte/1z/serce.png', '2026-06-07 20:00:00.000000'),
+(5, 2, 'Bransoletka Biała Gwiazda', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 16 cm i wykorzystuje zawieszkę „gwiazda”. Całość została wyceniona na 5800.00 zł.', '/src/assets/creator/Bransoletka/Srebro/1z/gwiazda.png', '2026-06-07 20:02:05.000000'),
+(5, 3, 'Bransoletka Różowy Księżyc', 'Autorski projekt typu bransoletka, wykonany w materiale Złoto różowe. Projekt ma rozmiar 20 cm i wykorzystuje zawieszkę „księżyc”. Całość została wyceniona na 6000.00 zł.', '/src/assets/creator/Bransoletka/Złoto różowe/1z/księżyc.png', '2026-06-07 20:04:10.000000'),
+(5, 4, 'Bransoletka Platynowa Koniczyna', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 18 cm i wykorzystuje zawieszkę „koniczyna”. Całość została wyceniona na 7000.00 zł.', '/src/assets/creator/Bransoletka/Srebro/1z/koniczyna.png', '2026-06-07 20:06:15.000000'),
+(5, 5, 'Bransoletka Srebrne Słońce', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 16 cm i wykorzystuje zawieszkę „słońce”. Całość została wyceniona na 3400.00 zł.', '/src/assets/creator/Bransoletka/Srebro/1z/słońce.png', '2026-06-07 20:08:20.000000'),
+(6, 6, 'Bransoletka Krzyż i Serce', 'Autorski projekt typu bransoletka, wykonany w materiale Złoto żółte. Projekt ma rozmiar 20 cm i wykorzystuje dwie zawieszki: „krzyż” oraz „serce”. Całość została wyceniona na 6600.00 zł.', '/src/assets/creator/Bransoletka/Złoto żółte/2z/krzyż-serce.png', '2026-06-07 20:10:25.000000'),
+(6, 7, 'Bransoletka Gwiazda i Księżyc', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 18 cm i wykorzystuje dwie zawieszki: „gwiazda” oraz „księżyc”. Całość została wyceniona na 6800.00 zł.', '/src/assets/creator/Bransoletka/Srebro/2z/gwiazda-księżyc.png', '2026-06-07 20:12:30.000000'),
+(6, 8, 'Bransoletka Słońce i Koniczyna', 'Autorski projekt typu bransoletka, wykonany w materiale Złoto różowe. Projekt ma rozmiar 16 cm i wykorzystuje dwie zawieszki: „słońce” oraz „koniczyna”. Całość została wyceniona na 6400.00 zł.', '/src/assets/creator/Bransoletka/Złoto różowe/2z/słońce-koniczyna.png', '2026-06-07 20:14:35.000000'),
+(6, 9, 'Bransoletka Nieskończoność i Serce', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 20 cm i wykorzystuje dwie zawieszki: „nieskończoność” oraz „serce”. Całość została wyceniona na 8000.00 zł.', '/src/assets/creator/Bransoletka/Srebro/2z/nieskończoność-serce.png', '2026-06-07 20:16:40.000000'),
+(6, 10, 'Bransoletka Krzyż i Gwiazda', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 18 cm i wykorzystuje dwie zawieszki: „krzyż” oraz „gwiazda”. Całość została wyceniona na 4400.00 zł.', '/src/assets/creator/Bransoletka/Srebro/2z/krzyż-gwiazda.png', '2026-06-07 20:18:45.000000'),
+(7, 11, 'Bransoletka Dwa Serca', 'Autorski projekt typu bransoletka, wykonany w materiale Złoto żółte. Projekt ma rozmiar 16 cm i wykorzystuje dwie zawieszki: „serce” oraz „serce”. Całość została wyceniona na 6200.00 zł.', '/src/assets/creator/Bransoletka/Złoto żółte/2z/serce-serce.png', '2026-06-07 20:20:50.000000'),
+(7, 12, 'Bransoletka Dwie Koniczyny', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 20 cm i wykorzystuje dwie zawieszki: „koniczyna” oraz „koniczyna”. Całość została wyceniona na 7000.00 zł.', '/src/assets/creator/Bransoletka/Srebro/2z/koniczyna-koniczyna.png', '2026-06-07 20:22:55.000000'),
+(7, 13, 'Bransoletka Dwa Księżyce', 'Autorski projekt typu bransoletka, wykonany w materiale Złoto różowe. Projekt ma rozmiar 18 cm i wykorzystuje dwie zawieszki: „księżyc” oraz „księżyc”. Całość została wyceniona na 6600.00 zł.', '/src/assets/creator/Bransoletka/Złoto różowe/2z/księżyc-księżyc.png', '2026-06-07 20:25:00.000000'),
+(7, 14, 'Bransoletka Dwa Słońca', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 16 cm i wykorzystuje dwie zawieszki: „słońce” oraz „słońce”. Całość została wyceniona na 7600.00 zł.', '/src/assets/creator/Bransoletka/Srebro/2z/słońce-słońce.png', '2026-06-07 20:27:05.000000'),
+(7, 15, 'Bransoletka Dwie Gwiazdy', 'Autorski projekt typu bransoletka, wykonany w materiale Srebro. Projekt ma rozmiar 20 cm i wykorzystuje dwie zawieszki: „gwiazda” oraz „gwiazda”. Całość została wyceniona na 4600.00 zł.', '/src/assets/creator/Bransoletka/Srebro/2z/gwiazda-gwiazda.png', '2026-06-07 20:29:10.000000'),
+(8, 16, 'Naszyjnik Złote Serce', 'Autorski projekt typu naszyjnik, wykonany w materiale Złoto żółte. Projekt ma rozmiar 40 cm i wykorzystuje zawieszkę „serce”. Całość została wyceniona na 5600.00 zł.', '/src/assets/creator/Naszyjnik/Złoto żółte/1z/serce.png', '2026-06-07 20:31:15.000000'),
+(8, 17, 'Naszyjnik Biała Koniczyna', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 45 cm i wykorzystuje zawieszkę „koniczyna”. Całość została wyceniona na 6300.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', '2026-06-07 20:33:20.000000'),
+(8, 18, 'Naszyjnik Różowy Księżyc', 'Autorski projekt typu naszyjnik, wykonany w materiale Złoto różowe. Projekt ma rozmiar 50 cm i wykorzystuje zawieszkę „księżyc”. Całość została wyceniona na 6400.00 zł.', '/src/assets/creator/Naszyjnik/Złoto różowe/1z/księżyc.png', '2026-06-07 20:35:25.000000'),
+(8, 19, 'Naszyjnik Platynowe Słońce', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 40 cm i wykorzystuje zawieszkę „słońce”. Całość została wyceniona na 7000.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/słońce.png', '2026-06-07 20:37:30.000000'),
+(8, 20, 'Naszyjnik Srebrny Krzyż', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 45 cm i wykorzystuje zawieszkę „krzyż”. Całość została wyceniona na 3900.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/krzyż.png', '2026-06-07 20:39:35.000000'),
+(9, 21, 'Naszyjnik Złota Nieskończoność', 'Autorski projekt typu naszyjnik, wykonany w materiale Złoto żółte. Projekt ma rozmiar 50 cm i wykorzystuje zawieszkę „nieskończoność”. Całość została wyceniona na 6200.00 zł.', '/src/assets/creator/Naszyjnik/Złoto żółte/1z/nieskończoność.png', '2026-06-07 20:41:40.000000'),
+(9, 22, 'Naszyjnik Biała Gwiazda', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 40 cm i wykorzystuje zawieszkę „gwiazda”. Całość została wyceniona na 6000.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/gwiazda.png', '2026-06-07 20:43:45.000000'),
+(9, 23, 'Naszyjnik Różowe Serce', 'Autorski projekt typu naszyjnik, wykonany w materiale Złoto różowe. Projekt ma rozmiar 45 cm i wykorzystuje zawieszkę „serce”. Całość została wyceniona na 6100.00 zł.', '/src/assets/creator/Naszyjnik/Złoto różowe/1z/serce.png', '2026-06-07 20:45:50.000000'),
+(9, 24, 'Naszyjnik Platynowa Koniczyna', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 50 cm i wykorzystuje zawieszkę „koniczyna”. Całość została wyceniona na 7600.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', '2026-06-07 20:47:55.000000'),
+(9, 25, 'Naszyjnik Srebrny Księżyc', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 40 cm i wykorzystuje zawieszkę „księżyc”. Całość została wyceniona na 3600.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/księżyc.png', '2026-06-07 20:50:00.000000'),
+(10, 26, 'Naszyjnik Złote Słońce', 'Autorski projekt typu naszyjnik, wykonany w materiale Złoto żółte. Projekt ma rozmiar 45 cm i wykorzystuje zawieszkę „słońce”. Całość została wyceniona na 5900.00 zł.', '/src/assets/creator/Naszyjnik/Złoto żółte/1z/słońce.png', '2026-06-07 20:52:05.000000'),
+(10, 27, 'Naszyjnik Biały Krzyż', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 50 cm i wykorzystuje zawieszkę „krzyż”. Całość została wyceniona na 6600.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/krzyż.png', '2026-06-07 20:54:10.000000'),
+(10, 28, 'Naszyjnik Różowa Nieskończoność', 'Autorski projekt typu naszyjnik, wykonany w materiale Złoto różowe. Projekt ma rozmiar 40 cm i wykorzystuje zawieszkę „nieskończoność”. Całość została wyceniona na 5800.00 zł.', '/src/assets/creator/Naszyjnik/Złoto różowe/1z/nieskończoność.png', '2026-06-07 20:56:15.000000'),
+(10, 29, 'Naszyjnik Platynowa Gwiazda', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 45 cm i wykorzystuje zawieszkę „gwiazda”. Całość została wyceniona na 7300.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/gwiazda.png', '2026-06-07 20:58:20.000000'),
+(10, 30, 'Naszyjnik Srebrna Koniczyna', 'Autorski projekt typu naszyjnik, wykonany w materiale Srebro. Projekt ma rozmiar 50 cm i wykorzystuje zawieszkę „koniczyna”. Całość została wyceniona na 4200.00 zł.', '/src/assets/creator/Naszyjnik/Srebro/1z/koniczyna.png', '2026-06-07 21:00:25.000000');
 
 -- Orders
-INSERT INTO Orders (user_id, status, price) VALUES
-(1, 'Zrealizowane', 179.99),
-(2, 'W realizacji', 249.99),
-(3, 'Oczekujące', 599.99);
+INSERT INTO Orders (order_id, user_id, status, price) VALUES
+(1, 1, 'Oczekujące', 11200.00),
+(2, 2, 'W realizacji', 10200.00),
+(3, 3, 'Zrealizowane', 17600.00),
+(4, 4, 'Zrealizowane', 14200.00),
+(5, 5, 'Anulowane', 13200.00),
+(6, 6, 'Oczekujące', 19000.00),
+(7, 7, 'W realizacji', 13400.00),
+(8, 8, 'Zrealizowane', 12800.00),
+(9, 9, 'Zrealizowane', 24400.00),
+(10, 10, 'Anulowane', 13800.00),
+(11, 11, 'Oczekujące', 10400.00),
+(12, 12, 'W realizacji', 16200.00),
+(13, 13, 'Zrealizowane', 11800.00),
+(14, 14, 'Zrealizowane', 13200.00),
+(15, 15, 'Anulowane', 19800.00),
+(16, 16, 'Oczekujące', 11400.00),
+(17, 17, 'W realizacji', 13500.00),
+(18, 18, 'Zrealizowane', 17600.00),
+(19, 19, 'Zrealizowane', 13200.00),
+(20, 20, 'Anulowane', 15700.00),
+(21, 1, 'Oczekujące', 19000.00),
+(22, 2, 'W realizacji', 14200.00),
+(23, 3, 'Zrealizowane', 9700.00),
+(24, 4, 'Zrealizowane', 16000.00),
+(25, 5, 'Anulowane', 13800.00);
+
 
 -- Cart
 INSERT INTO Cart (user_id, product_id, project_id, quantity) VALUES
 (1, 1, NULL, 2),
-(1, NULL, 1, 1),
-(2, 3, NULL, 1),
-(3, NULL, 3, 1);
+(2, NULL, 2, 1),
+(3, 3, NULL, 1),
+(4, NULL, 4, 1),
+(5, 5, NULL, 3),
+(6, NULL, 6, 1),
+(7, 7, NULL, 2),
+(8, NULL, 8, 1),
+(9, 9, NULL, 1),
+(10, NULL, 10, 1),
+(11, 11, NULL, 3),
+(12, NULL, 12, 1),
+(13, 13, NULL, 2),
+(14, NULL, 14, 1),
+(15, 15, NULL, 1),
+(16, NULL, 16, 1),
+(17, 17, NULL, 3),
+(18, NULL, 18, 1),
+(19, 19, NULL, 2),
+(20, NULL, 20, 1);
+
 
 -- Order_Items
-INSERT INTO Order_Items
-(order_id, product_id, project_id, quantity, price_at_purchase)
-VALUES
-(1, 1, NULL, 1, 149.99),
-(1, NULL, 1, 1, 179.99),
-(2, 3, NULL, 2, 199.99),
-(3, NULL, 3, 1, 599.99);
+INSERT INTO Order_Items (order_id, product_id, project_id, quantity, price_at_purchase) VALUES
+(1, 1, NULL, 1, 5600.00),
+(1, NULL, 1, 1, 5600.00),
+(2, 2, NULL, 1, 4400.00),
+(2, NULL, 2, 1, 5800.00),
+(3, 3, NULL, 2, 5800.00),
+(3, NULL, 3, 1, 6000.00),
+(4, 4, NULL, 1, 7200.00),
+(4, NULL, 4, 1, 7000.00),
+(5, 5, NULL, 1, 5600.00),
+(5, NULL, 5, 1, 3400.00),
+(5, 11, NULL, 1, 4200.00),
+(6, 6, NULL, 2, 6200.00),
+(6, NULL, 6, 1, 6600.00),
+(7, 7, NULL, 1, 6600.00),
+(7, NULL, 7, 1, 6800.00),
+(8, 8, NULL, 1, 6400.00),
+(8, NULL, 8, 1, 6400.00),
+(9, 9, NULL, 2, 8200.00),
+(9, NULL, 9, 1, 8000.00),
+(10, 10, NULL, 1, 3600.00),
+(10, NULL, 10, 1, 4400.00),
+(10, 3, NULL, 1, 5800.00),
+(11, 11, NULL, 1, 4200.00),
+(11, NULL, 11, 1, 6200.00),
+(12, 12, NULL, 2, 4600.00),
+(12, NULL, 12, 1, 7000.00),
+(13, 13, NULL, 1, 5200.00),
+(13, NULL, 13, 1, 6600.00),
+(14, 1, NULL, 1, 5600.00),
+(14, NULL, 14, 1, 7600.00),
+(15, 2, NULL, 2, 4400.00),
+(15, NULL, 15, 1, 4600.00),
+(15, 8, NULL, 1, 6400.00),
+(16, 3, NULL, 1, 5800.00),
+(16, NULL, 16, 1, 5600.00),
+(17, 4, NULL, 1, 7200.00),
+(17, NULL, 17, 1, 6300.00),
+(18, 5, NULL, 2, 5600.00),
+(18, NULL, 18, 1, 6400.00),
+(19, 6, NULL, 1, 6200.00),
+(19, NULL, 19, 1, 7000.00),
+(20, 7, NULL, 1, 6600.00),
+(20, NULL, 20, 1, 3900.00),
+(20, 13, NULL, 1, 5200.00),
+(21, 8, NULL, 2, 6400.00),
+(21, NULL, 21, 1, 6200.00),
+(22, 9, NULL, 1, 8200.00),
+(22, NULL, 22, 1, 6000.00),
+(23, 10, NULL, 1, 3600.00),
+(23, NULL, 23, 1, 6100.00),
+(24, 11, NULL, 2, 4200.00),
+(24, NULL, 24, 1, 7600.00),
+(25, 12, NULL, 1, 4600.00),
+(25, NULL, 25, 1, 3600.00),
+(25, 5, NULL, 1, 5600.00);
 
--- Blog_Posts
-INSERT INTO Blog_Posts
-(user_id, project_id, title, description, image_path)
-VALUES
-(
-    2,
-    2,
-    'Mój autorski naszyjnik',
-    'Projekt inspirowany naturą i motywem motyla.',
-    'blog/post1.jpg'
-),
-(
-    4,
-    3,
-    'Ekskluzywny pierścionek',
-    'Pierścionek wykonany z platyny z ozdobnym kamieniem.',
-    'blog/post2.jpg'
-);
 
 -- Favorites
 INSERT INTO Favorites (user_id, product_id, project_id) VALUES
-(1, 3, NULL),
-(1, NULL, 2),
-(2, 1, NULL),
-(3, NULL, 1),
-(4, 4, NULL);
+(1, 1, NULL),
+(2, NULL, 2),
+(3, 3, NULL),
+(4, NULL, 4),
+(5, 5, NULL),
+(6, NULL, 6),
+(7, 7, NULL),
+(8, NULL, 8),
+(9, 9, NULL),
+(10, NULL, 10),
+(11, 11, NULL),
+(12, NULL, 12),
+(13, 13, NULL),
+(14, NULL, 14),
+(15, 15, NULL),
+(16, NULL, 16),
+(17, 17, NULL),
+(18, NULL, 18),
+(19, 19, NULL),
+(20, NULL, 20),
+(1, 21, NULL),
+(2, NULL, 22),
+(3, 23, NULL),
+(4, NULL, 24),
+(5, 25, NULL),
+(6, NULL, 26),
+(7, 27, NULL),
+(8, NULL, 28),
+(9, 29, NULL),
+(10, NULL, 30),
+(11, 31, NULL),
+(12, NULL, 2),
+(13, 33, NULL),
+(14, NULL, 4),
+(15, 35, NULL),
+(16, NULL, 6),
+(17, 37, NULL),
+(18, NULL, 8),
+(19, 39, NULL),
+(20, NULL, 10),
+(1, 1, NULL),
+(2, NULL, 12),
+(3, 3, NULL),
+(4, NULL, 14),
+(5, 5, NULL),
+(6, NULL, 16),
+(7, 7, NULL),
+(8, NULL, 18),
+(9, 9, NULL),
+(10, NULL, 20);
+
+-- ============================================================
+-- Dane tworzą łącznie:
+-- 20 użytkowników, 4 kategorie, 40 produktów,
+-- 30 projektów własnych, 20 postów blogowych,
+-- 25 zamówień, 60 pozycji zamówień,
+-- 20 pozycji koszyka i 50 ulubionych.
+-- ============================================================

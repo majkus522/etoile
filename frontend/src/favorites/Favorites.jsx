@@ -304,14 +304,6 @@ function Favorites() {
 								</div>
 							)}
 						</div>
-
-						<h2 className="fav-upsell-heading">Zainspirowane Twoimi ulubionymi</h2>
-
-						<div className="fav-upsell-grid">
-							{suggestedProducts.map((item) => (
-								<FavoritesSuggestions key={item.id} product={item} />
-							))}
-						</div>
 					</div>
 				</div>
 			</div>
