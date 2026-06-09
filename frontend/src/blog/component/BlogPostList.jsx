@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import BlogPostCard from "./BlogPostCard";
 
 export default function BlogPostList() {
 	const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
+
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
-	const [images, setImages] = useState([]);
 
 	const postsPerPage = 5;
+
+	// cache projektów
+	const projectCache = useRef({});
 
 	useEffect(() => {
 		async function fetchPosts() {
@@ -22,30 +25,37 @@ export default function BlogPostList() {
 					{
 						headers: {
 							"Content-Type": "application/json",
-							"Access-Control-Allow-Origin": "",
-							"Access-Control-Allow-Methods": "",
-							"Access-Control-Allow-Headers": "*",
 						},
 					}
 				);
 
-				if (!response.ok) {
-					const errorText = await response.text();
-					throw new Error(
-						`Nie udało się pobrać postów. Status: ${response.status}. ${errorText}`
-					);
-				}
-
 				const data = await response.json();
+				const postsArray = data.posts || [];
 
-				if (Array.isArray(data)) {
-					setImages(data);
-					setPosts(data);
-					setTotalPages(Math.ceil(data.length / postsPerPage));
-				} else {
-					setPosts(data.posts || []);
-					setTotalPages(data.pagination?.total_pages || 1);
-				}
+				const enriched = await Promise.all(
+					postsArray.map(async (post) => {
+						let project;
+
+						if (projectCache.current[post.project_id]) {
+							project = projectCache.current[post.project_id];
+						} else {
+							const res = await fetch(
+								`http://localhost:8000/projects/${post.project_id}`
+							);
+
+							project = await res.json();
+							projectCache.current[post.project_id] = project;
+						}
+
+						return {
+							...post,
+							author: project.username,
+						};
+					})
+				);
+
+				setPosts(enriched);
+				setTotalPages(data.pagination?.total_pages || 1);
 			} catch (err) {
 				setError(err.message);
 			} finally {
@@ -56,36 +66,24 @@ export default function BlogPostList() {
 		fetchPosts();
 	}, [currentPage]);
 
-	if (loading) {
-		return <p className="blog-empty-message">Ładowanie postów...</p>;
-	}
-
-	if (error) {
-		return <p className="blog-empty-message">{error}</p>;
-	}
-
-	if (posts.length === 0) {
-		return (
-			<div className="blog-empty-box">
-				<h2>Brak postów</h2>
-				<p>W bazie danych nie ma jeszcze żadnych wpisów blogowych.</p>
-			</div>
-		);
-	}
+	if (loading) return <p>Ładowanie postów...</p>;
+	if (error) return <p>{error}</p>;
 
 	return (
 		<>
+			{/* POSTY */}
 			{posts.map((post) => (
 				<BlogPostCard key={post.post_id} post={post} />
 			))}
 
+			{/* PAGINACJA — NIC NIE ZMIENIONE */}
 			{totalPages > 1 && (
 				<div className="blog-pagination">
 					<button
 						onClick={() => setCurrentPage((prev) => prev - 1)}
 						disabled={currentPage === 1}
 						className="blog-pagination-button">
-						Poprzednia
+						← Poprzednia
 					</button>
 
 					<span className="blog-pagination-info">
@@ -96,7 +94,7 @@ export default function BlogPostList() {
 						onClick={() => setCurrentPage((prev) => prev + 1)}
 						disabled={currentPage === totalPages}
 						className="blog-pagination-button">
-						Następna
+						Następna →
 					</button>
 				</div>
 			)}

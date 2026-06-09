@@ -88,6 +88,7 @@ function OrderList() {
 							...item,
 							name: details.name,
 							image: details.image_path,
+							seller: details.username,
 						};
 					})
 				);
