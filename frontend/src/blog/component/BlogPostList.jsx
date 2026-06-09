@@ -66,8 +66,22 @@ export default function BlogPostList() {
 		fetchPosts();
 	}, [currentPage]);
 
-	if (loading) return <p>Ładowanie postów...</p>;
-	if (error) return <p>{error}</p>;
+	if (loading) {
+		return <p className="blog-empty-message">Ładowanie postów...</p>;
+	}
+
+	if (error) {
+		return <p className="blog-empty-message">{error}</p>;
+	}
+
+	if (posts.length === 0) {
+		return (
+			<div className="blog-empty-box">
+				<h2>Brak postów</h2>
+				<p>W bazie danych nie ma jeszcze żadnych wpisów blogowych.</p>
+			</div>
+		);
+	}
 
 	return (
 		<>
