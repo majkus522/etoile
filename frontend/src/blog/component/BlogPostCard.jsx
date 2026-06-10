@@ -19,7 +19,9 @@ function BlogPostCard({ post }) {
 							Autor: {post.author}
 						</Link>
 					</div>
-
+					<p className="user-post-date">
+						{new Date(post.created_at).toLocaleDateString("pl-PL")}
+					</p>
 					<p className="blog-post-excerpt">
 						{post.description?.length > 180
 							? post.description.slice(0, 180) + "..."

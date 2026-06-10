@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./UserPosts.css";
 
 export default function UserPosts() {
@@ -173,6 +174,9 @@ export default function UserPosts() {
 										? post.description.slice(0, 150) + "..."
 										: post.description}
 								</p>
+								<Link to={`/blog/${post.post_id}`} className="blog-post-read-more">
+									Czytaj dalej...
+								</Link>
 								<p className="user-post-date">
 									{new Date(post.created_at).toLocaleDateString("pl-PL")}
 								</p>

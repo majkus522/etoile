@@ -49,7 +49,8 @@
 
 .blog-post-header {
 	display: flex;
-	justify-content: space-between; /* 👈 tytuł lewo, autor prawo */
+	justify-content: space-between;
+	/* 👈 tytuł lewo, autor prawo */
 	align-items: center;
 	margin-bottom: 10px;
 	gap: 12px;
@@ -67,4 +68,11 @@
 .blog-post-author:hover {
 	color: #0a1128;
 	text-decoration: underline;
+}
+
+.user-post-date {
+	margin: 0;
+	color: #999;
+	font-size: 0.85rem;
+	margin-top: 0.25rem;
 }
