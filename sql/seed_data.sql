@@ -218,13 +218,7 @@ INSERT INTO Order_Items (order_id, product_id, project_id, quantity, price_at_pu
 (22, 9, NULL, 1, 8200.00),
 (22, NULL, 22, 1, 6000.00),
 (23, 10, NULL, 1, 3600.00),
-(23, NULL, 23, 1, 6100.00),
-(24, 11, NULL, 2, 4200.00),
-(24, NULL, 24, 1, 7600.00),
-(25, 12, NULL, 1, 4600.00),
-(25, NULL, 25, 1, 3600.00),
-(25, 5, NULL, 1, 5600.00);
-
+(23, NULL, 23, 1, 6100.00);
 
 -- Favorites
 INSERT INTO Favorites (user_id, product_id, project_id) VALUES
