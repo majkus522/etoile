@@ -163,8 +163,6 @@ INSERT INTO Orders (user_id, status, price) VALUES
 (18, 'Zrealizowane', 17600.00),
 (19, 'Zrealizowane', 13200.00),
 (20, 'Anulowane', 15700.00),
-(21, 'Oczekujące', 19000.00),
-(22, 'W realizacji', 14200.00),
 (3, 'Zrealizowane', 9700.00),
 (4, 'Zrealizowane', 16000.00),
 (5, 'Anulowane', 13800.00);
