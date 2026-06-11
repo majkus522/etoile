@@ -314,7 +314,7 @@ INSERT INTO Favorites (user_id, product_id, project_id) VALUES
 (5, NULL, 28),
 (6, NULL, 28),
 (7, NULL, 28),
-(8, NULL, 28);
+(8, NULL, 28),
 (1, 1, NULL),
 (2, NULL, 2),
 (3, 3, NULL),
